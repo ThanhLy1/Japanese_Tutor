@@ -16,7 +16,7 @@ public:
     }
 
     void startQuiz() {
-    json& vocabulary = data_["vocabulary"];
+    json& vocabulary = data_["vocabulary"]; 
     std::shuffle(vocabulary.begin(), vocabulary.end(), std::mt19937(std::random_device()()));
 
     int correctCount = 0;
@@ -63,6 +63,7 @@ public:
     std::cout << "Incorrect Answers: " << totalCount - correctCount << std::endl;
     std::cout << "Score: " << score << std::endl;
 
+    //show the last word
     if (!lastWord.empty()) {
         std::cout << "Last Word: " << lastWord << std::endl;
     }

@@ -1,0 +1,497 @@
+[
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "SELF_ONLY"
+      },
+      "name": "Shikoku Metan",
+      "speaker_uuid": "7ffcb7ce-00ec-4bdc-82cd-45a8889e43ff",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 2
+        },
+        {
+          "name": "Sweet",
+          "id": 0
+        },
+        {
+          "name": "Tsundere",
+          "id": 6
+        },
+        {
+          "name": "Sexy",
+          "id": 4
+        },
+        {
+          "name": "Whisper",
+          "id": 36
+        },
+        {
+          "name": "Hush Hush",
+          "id": 37
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "SELF_ONLY"
+      },
+      "name": "Zundamon",
+      "speaker_uuid": "388f246b-8c41-4ac1-8e2d-5d79f3ff56d9",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 3
+        },
+        {
+          "name": "Sweet",
+          "id": 1
+        },
+        {
+          "name": "Tsundere",
+          "id": 7
+        },
+        {
+          "name": "Sexy",
+          "id": 5
+        },
+        {
+          "name": "Whisper",
+          "id": 22
+        },
+        {
+          "name": "Hush Hush",
+          "id": 38
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Kasukabe Tsumugi",
+      "speaker_uuid": "35b2c544-660e-401e-b503-0e14c635303a",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 8
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Amehare Hau",
+      "speaker_uuid": "3474ee95-c274-47f9-aa1a-8322163d96f1",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 10
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Namine Ritsu",
+      "speaker_uuid": "b1a81618-b27b-40d2-b0ea-27a9ad408c4b",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 9
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Genno Takehiro",
+      "speaker_uuid": "c30dc15a-0992-4f8d-8bb8-ad3b314e6a6f",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 11
+        },
+        {
+          "name": "Joy",
+          "id": 39
+        },
+        {
+          "name": "Grumpy",
+          "id": 40
+        },
+        {
+          "name": "Sadness",
+          "id": 41
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Shiraki Tora",
+      "speaker_uuid": "e5020595-5c5d-4e87-b849-270a518d0dcf",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 12
+        },
+        {
+          "name": "Yay",
+          "id": 32
+        },
+        {
+          "name": "Nervous",
+          "id": 33
+        },
+        {
+          "name": "Angry",
+          "id": 34
+        },
+        {
+          "name": "Crying",
+          "id": 35
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Aoyama Ryusei",
+      "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 13
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Meimei Himari",
+      "speaker_uuid": "8eaad775-3119-417e-8cf4-2a10bfd592c8",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 14
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "SELF_ONLY"
+      },
+      "name": "Kyushu Sora",
+      "speaker_uuid": "481fb609-6446-4870-9f46-90c4dd623403",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 16
+        },
+        {
+          "name": "Sweet",
+          "id": 15
+        },
+        {
+          "name": "Tsundere",
+          "id": 18
+        },
+        {
+          "name": "Sexy",
+          "id": 17
+        },
+        {
+          "name": "Whisper",
+          "id": 19
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "SELF_ONLY"
+      },
+      "name": "Mochiko-san",
+      "speaker_uuid": "9f3ee141-26ad-437e-97bd-d22298d02ad2",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 20
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Kenzaki Oushi",
+      "speaker_uuid": "1a17ca16-7ee5-4ea5-b191-2f02ace24d21",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 21
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "WhiteCUL",
+      "speaker_uuid": "67d5d8da-acd7-4207-bb10-b5542d3a663b",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 23
+        },
+        {
+          "name": "Fun",
+          "id": 24
+        },
+        {
+          "name": "Sad",
+          "id": 25
+        },
+        {
+          "name": "Scared",
+          "id": 26
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Ura Oni",
+      "speaker_uuid": "0f56c2f2-644c-49c9-8989-94e11f7129d0",
+      "styles": [
+        {
+          "name": "Human Ver.",
+          "id": 27
+        },
+        {
+          "name": "Plushie Ver.",
+          "id": 28
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "No.7",
+      "speaker_uuid": "044830d2-f23b-44d6-ac0d-b5d733caa900",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 29
+        },
+        {
+          "name": "Announcement",
+          "id": 30
+        },
+        {
+          "name": "Storytelling",
+          "id": 31
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Chibishiki Jii",
+      "speaker_uuid": "468b8e94-9da4-4f7a-8715-a22a48844f9e",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 42
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Sakura Uta Miko",
+      "speaker_uuid": "0693554c-338e-4790-8982-b9c6d476dc69",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 43
+        },
+        {
+          "name": "Second Form",
+          "id": 44
+        },
+        {
+          "name": "Loli",
+          "id": 45
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Sayo/SAYO",
+      "speaker_uuid": "a8cc6d22-aad0-4ab8-bf1e-2f843924164a",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 46
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Nurse Robo_TypeT",
+      "speaker_uuid": "882a636f-3bac-431a-966d-c5e6bba9f949",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 47
+        },
+        {
+          "name": "Easygoing",
+          "id": 48
+        },
+        {
+          "name": "Fear",
+          "id": 49
+        },
+        {
+          "name": "Secret Talk",
+          "id": 50
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "†Holy Knight Beni Sakura†",
+      "speaker_uuid": "471e39d2-fb11-4c8c-8d89-4b322d2498e0",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 51
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Jakumatsu Shuji",
+      "speaker_uuid": "0acebdee-a4a5-4e12-a695-e19609728e30",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 52
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Kiga Shigenori",
+      "speaker_uuid": "7d1e7ba7-f957-40e5-a3fc-da49f769ab65",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 53
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Haruka Nana",
+      "speaker_uuid": "ba5d2428-f7e0-4c20-ac41-9dd56e9178b4",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 54
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Nekotsukai Aru",
+      "speaker_uuid": "00a5c10c-d3bd-459f-83fd-43180b521a44",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 55
+        },
+        {
+          "name": "Calm",
+          "id": 56
+        },
+        {
+          "name": "Excited",
+          "id": 57
+        }
+      ],
+      "version": "0.14.3"
+    },
+    {
+      "supported_features": {
+        "permitted_synthesis_morphing": "ALL"
+      },
+      "name": "Nekotsukai Bee",
+      "speaker_uuid": "c20a2254-0349-4470-9fc8-e5c0f8cf3404",
+      "styles": [
+        {
+          "name": "Normal",
+          "id": 58
+        },
+        {
+          "name": "Calm",
+          "id": 59
+        },
+        {
+          "name": "Shy",
+          "id": 60
+        }
+      ],
+      "version": "0.14.3"
+    }
+  ]
+  
