@@ -4,6 +4,9 @@ CXX = g++
 # Compiler flags
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
+# SDL libraries
+SDL_LIBS = -lSDL2 -lSDL2_mixer
+
 # Source files
 SOURCES = vocab_quiz.cpp
 
@@ -18,7 +21,7 @@ EXECUTABLE = vocab_quiz
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(SDL_LIBS)
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $< -o $@

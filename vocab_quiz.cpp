@@ -1,9 +1,12 @@
 #include <iostream>
+#include <sstream> // For commandStream;
 #include <fstream>
 #include <random>
 #include <algorithm>
-#include <cstdlib> // For system("clear") on Unix-like systems
-#include <nlohmann/json.hpp>
+#include <cstdlib> // For system("clear") on Unix-like systems, system()
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include "../include/nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
@@ -28,7 +31,7 @@ public:
         std::string question = word["word"];
         std::string answer = word["meaning"];
 
-        clearConsole();
+        //clearConsole();
         std::cout << "Question: " << question << std::endl;
         std::string userAnswer;
         std::cout << "Your answer (type 'q' to quit): ";
@@ -56,7 +59,7 @@ public:
         }
     }
 
-    clearConsole();
+    //clearConsole();
     std::cout << "Quiz completed!" << std::endl;
     std::cout << "Total Questions: " << totalCount << std::endl;
     std::cout << "Correct Answers: " << correctCount << std::endl;
@@ -88,13 +91,84 @@ private:
     json data_;
 };
 
+class AudioPlayer {
+public:
+    AudioPlayer() {
+        SDL_Init(SDL_INIT_AUDIO);
+        Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    }
+
+    ~AudioPlayer() {
+        Mix_CloseAudio();
+        SDL_Quit();
+    }
+
+    bool loadAudio(const std::string& filePath) {
+        music_ = Mix_LoadMUS(filePath.c_str());
+        return (music_ != nullptr);
+    }
+
+    void play() {
+        if (music_) {
+            Mix_PlayMusic(music_, 1);  // 1 for loop playback
+        }
+    }
+
+    void stop() {
+        Mix_HaltMusic();
+    }
+
+    void pause() {
+        Mix_PauseMusic();
+    }
+
+    void resume() {
+        Mix_ResumeMusic();
+    }
+
+private:
+    Mix_Music* music_ = nullptr;
+};
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cout << "Usage: ./vocab_quiz <filename.json>" << std::endl;
         return 1;
     }
 
+    // Provide the absolute path to the Python interpreter and the Python script
+    std::string pythonInterpreter = "/usr/bin/python3";
+    std::string pythonScript = "voiceSynth.py";
+
+    // Parameters to pass to the Python script
+    std::string text = "ユー オウド ミー 1万円";
+    int presetId = 1;
+    int speaker = 18;
+
+    // Create a command to execute the Python script with the parameters
+    std::stringstream commandStream;
+    commandStream << pythonInterpreter << " " << pythonScript << " \"" << text << "\" " << presetId << " " << speaker;
+    std::string command = commandStream.str();
+
+     // Execute the Python script
+    int result = system(command.c_str());
+
+    // Check the return value for errors
+    if (result == 0) {
+        std::cout << "Python script executed successfully." << std::endl;
+    } else {
+        std::cerr << "Error executing Python script. Return code: " << result << std::endl;
+    }
+
     std::string filename = argv[1];
+
+    AudioPlayer audioPlayer;
+
+    if (audioPlayer.loadAudio("audio.wav")) {
+        audioPlayer.play();
+    } else {
+        // Handle audio loading error
+    }
 
     VocabularyQuiz quiz;
     quiz.loadVocabulary(filename);

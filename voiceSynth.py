@@ -43,39 +43,32 @@ class TextToSpeech:
         }
 
         synthesis_url = f"{self.BASE_URL}/synthesis"
-        synthesis_response = requests.post(synthesis_url, json=query_data, params=synthesis_params)
+        response = requests.post(synthesis_url, json=query_data, params=synthesis_params, headers=self.HEADERS)
 
-        if synthesis_response.status_code == 200:
-            audio_content = synthesis_response.content
+        if response.status_code == 200:
+            audio_content = response.content
             with open(audio_file_path, "wb") as audio_file:
                 audio_file.write(audio_content)
-            print("Audio file saved:", audio_file_path)
+            print(f"Audio file saved: {audio_file_path}")
         else:
-            print("Error:", synthesis_response.text)
-
-    def process_audio(text, preset_id, speaker):
-        # Process the audio with the provided parameters
-        # Your audio processing logic here
-        audio_content = f"Text: {text}, Preset ID: {preset_id}, Speaker: {speaker}"
-        
-        # Save the audio content to a file or perform other actions as needed
-        with open("audio.txt", "w") as audio_file:
-            audio_file.write(audio_content)
+            print("Error:", response.text)
 
 if __name__ == "__main__":
-    tts = TextToSpeech(speaker=20)
-    text = "私はAIです。私の作成にはChatGPTと音声合成技術が使用されました."
-    preset_id = 1
+    if len(sys.argv) != 4:
+        print("Usage: python3 script.py <text> <preset_id> <speaker>")
+        sys.exit(1)
 
+    text = sys.argv[1]
+    preset_id = int(sys.argv[2])
+    speaker = int(sys.argv[3])
+
+    tts = TextToSpeech(speaker)
     result = tts.audio_query(text)
-    print(result)
-
     result2 = tts.audio_query_from_preset(text, preset_id)
-    # print(result2)
 
     speed_scale = 1.0
-    volume_scale = 1.5
-    intonation_scale = 1.0
+    volume_scale = 1.0
+    intonation_scale = 2.0
     pre_phoneme_length = 0.1
     post_phoneme_length = 0.1
     audio_file_path = "audio.wav"

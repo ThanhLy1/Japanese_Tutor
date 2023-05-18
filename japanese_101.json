@@ -3,65 +3,20 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "university",
+      "meaning": "first-year student",
       "part_of_speech": "noun",
-      "reading": "だいがく",
+      "reading": "いちねんせい",
+      "recall_level": 2,
+      "word": "一年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "graduate student",
+      "part_of_speech": "noun",
+      "reading": "だいがくいんせい",
       "recall_level": 1,
-      "word": "大学"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "business management",
-      "part_of_speech": "noun",
-      "reading": "けいえいがく",
-      "recall_level": 2,
-      "word": "経営学"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "game",
-      "part_of_speech": "noun",
-      "reading": "ゲーム",
-      "recall_level": 2,
-      "word": "ゲーム"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "college student",
-      "part_of_speech": "noun",
-      "reading": "だいがくせい",
-      "recall_level": 2,
-      "word": "大学生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "movie",
-      "part_of_speech": "noun",
-      "reading": "えいが",
-      "recall_level": 2,
-      "word": "映画"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "friend",
-      "part_of_speech": "noun",
-      "reading": "ともだち",
-      "recall_level": 2,
-      "word": "友達"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "major",
-      "part_of_speech": "noun",
-      "reading": "せんこう",
-      "recall_level": 2,
-      "word": "専攻"
+      "word": "大学院生"
     },
     {
       "lesson": "1",
@@ -70,105 +25,6 @@
       "reading": "なまえ",
       "recall_level": 2,
       "word": "名前"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "Smith",
-      "part_of_speech": "noun",
-      "reading": "スミス",
-      "recall_level": 2,
-      "word": "スミス"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "computer",
-      "part_of_speech": "noun",
-      "reading": "コンピューター",
-      "recall_level": 2,
-      "word": "コンピューター"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "third-year student",
-      "part_of_speech": "noun",
-      "reading": "さんねんせい",
-      "recall_level": 2,
-      "word": "三年生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "nearby",
-      "part_of_speech": "noun",
-      "reading": "ちかく",
-      "recall_level": 2,
-      "word": "近く"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "dog",
-      "part_of_speech": "noun",
-      "reading": "いぬ",
-      "recall_level": 3,
-      "word": "犬"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "student",
-      "part_of_speech": "noun",
-      "reading": "がくせい",
-      "recall_level": 2,
-      "word": "学生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "Japan",
-      "part_of_speech": "noun",
-      "reading": "にほん",
-      "recall_level": 2,
-      "word": "日本"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "this person (polite)",
-      "part_of_speech": "noun",
-      "reading": "こちら",
-      "recall_level": 1,
-      "word": "こちら"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "anime",
-      "part_of_speech": "noun",
-      "reading": "アニメ",
-      "recall_level": 2,
-      "word": "アニメ"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "surfing",
-      "part_of_speech": "noun",
-      "reading": "サーフィン",
-      "recall_level": 3,
-      "word": "サーフィン"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "tennis",
-      "part_of_speech": "noun",
-      "reading": "テニス",
-      "recall_level": 2,
-      "word": "テニス"
     },
     {
       "dialogue": "1-2",
@@ -182,20 +38,29 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "first-year student",
+      "meaning": "nearby",
       "part_of_speech": "noun",
-      "reading": "いちねんせい",
+      "reading": "ちかく",
       "recall_level": 2,
-      "word": "一年生"
+      "word": "近く"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "sea",
+      "meaning": "third-year student",
       "part_of_speech": "noun",
-      "reading": "うみ",
+      "reading": "さんねんせい",
       "recall_level": 2,
-      "word": "海"
+      "word": "三年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "college student",
+      "part_of_speech": "noun",
+      "reading": "だいがくせい",
+      "recall_level": 2,
+      "word": "大学生"
     },
     {
       "dialogue": "1-2",
@@ -209,110 +74,38 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "fourth-year student",
+      "meaning": "dog",
       "part_of_speech": "noun",
-      "reading": "よねんせい",
-      "recall_level": 2,
-      "word": "四年生"
+      "reading": "いぬ",
+      "recall_level": 3,
+      "word": "犬"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "same",
+      "meaning": "game",
       "part_of_speech": "noun",
-      "reading": "おなじ",
+      "reading": "ゲーム",
       "recall_level": 2,
-      "word": "同じ"
+      "word": "ゲーム"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "hobby",
+      "meaning": "Smith",
       "part_of_speech": "noun",
-      "reading": "しゅみ",
+      "reading": "スミス",
       "recall_level": 2,
-      "word": "趣味"
+      "word": "スミス"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "internet",
+      "meaning": "this person (polite)",
       "part_of_speech": "noun",
-      "reading": "インターネット／ネット",
-      "recall_level": 2,
-      "word": "インターネット／ネット"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "place",
-      "part_of_speech": "noun",
-      "reading": "ところ",
-      "recall_level": 2,
-      "word": "所"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "sports",
-      "part_of_speech": "noun",
-      "reading": "スポーツ",
-      "recall_level": 2,
-      "word": "スポーツ"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "Japanese language",
-      "part_of_speech": "noun",
-      "reading": "にほんご",
-      "recall_level": 2,
-      "word": "日本語"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "second-year student",
-      "part_of_speech": "noun",
-      "reading": "にねんせい",
-      "recall_level": 2,
-      "word": "二年生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "travel",
-      "part_of_speech": "noun",
-      "reading": "りょこう",
-      "recall_level": 2,
-      "word": "旅行"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "English language",
-      "part_of_speech": "noun",
-      "reading": "えいご",
-      "recall_level": 2,
-      "word": "英語"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "cooking",
-      "part_of_speech": "noun",
-      "reading": "りょうり",
-      "recall_level": 2,
-      "word": "料理"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "history",
-      "part_of_speech": "noun",
-      "reading": "れきし",
-      "recall_level": 2,
-      "word": "歴史"
+      "reading": "こちら",
+      "recall_level": 1,
+      "word": "こちら"
     },
     {
       "dialogue": "1-2",
@@ -322,24 +115,6 @@
       "reading": "ハワイだいがく",
       "recall_level": 2,
       "word": "ハワイ大学"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "country",
-      "part_of_speech": "noun",
-      "reading": "くに",
-      "recall_level": 2,
-      "word": "国"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "Japanese person",
-      "part_of_speech": "noun",
-      "reading": "にほんじん",
-      "recall_level": 2,
-      "word": "日本人"
     },
     {
       "dialogue": "1-2",
@@ -362,11 +137,56 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "graduate student",
+      "meaning": "tennis",
       "part_of_speech": "noun",
-      "reading": "だいがくいんせい",
+      "reading": "テニス",
+      "recall_level": 2,
+      "word": "テニス"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "major",
+      "part_of_speech": "noun",
+      "reading": "せんこう",
+      "recall_level": 2,
+      "word": "専攻"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "surfing",
+      "part_of_speech": "noun",
+      "reading": "サーフィン",
+      "recall_level": 3,
+      "word": "サーフィン"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "cooking",
+      "part_of_speech": "noun",
+      "reading": "りょうり",
+      "recall_level": 2,
+      "word": "料理"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "sports",
+      "part_of_speech": "noun",
+      "reading": "スポーツ",
+      "recall_level": 2,
+      "word": "スポーツ"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "university",
+      "part_of_speech": "noun",
+      "reading": "だいがく",
       "recall_level": 1,
-      "word": "大学院生"
+      "word": "大学"
     },
     {
       "dialogue": "1-2",
@@ -380,11 +200,191 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
+      "meaning": "same",
+      "part_of_speech": "noun",
+      "reading": "おなじ",
+      "recall_level": 2,
+      "word": "同じ"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "business management",
+      "part_of_speech": "noun",
+      "reading": "けいえいがく",
+      "recall_level": 2,
+      "word": "経営学"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "Japan",
+      "part_of_speech": "noun",
+      "reading": "にほん",
+      "recall_level": 2,
+      "word": "日本"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "Japanese language",
+      "part_of_speech": "noun",
+      "reading": "にほんご",
+      "recall_level": 2,
+      "word": "日本語"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "hobby",
+      "part_of_speech": "noun",
+      "reading": "しゅみ",
+      "recall_level": 2,
+      "word": "趣味"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "internet",
+      "part_of_speech": "noun",
+      "reading": "インターネット／ネット",
+      "recall_level": 2,
+      "word": "インターネット／ネット"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "student",
+      "part_of_speech": "noun",
+      "reading": "がくせい",
+      "recall_level": 2,
+      "word": "学生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "fourth-year student",
+      "part_of_speech": "noun",
+      "reading": "よねんせい",
+      "recall_level": 2,
+      "word": "四年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "Japanese person",
+      "part_of_speech": "noun",
+      "reading": "にほんじん",
+      "recall_level": 2,
+      "word": "日本人"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "anime",
+      "part_of_speech": "noun",
+      "reading": "アニメ",
+      "recall_level": 2,
+      "word": "アニメ"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "country",
+      "part_of_speech": "noun",
+      "reading": "くに",
+      "recall_level": 2,
+      "word": "国"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "second-year student",
+      "part_of_speech": "noun",
+      "reading": "にねんせい",
+      "recall_level": 2,
+      "word": "二年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "computer",
+      "part_of_speech": "noun",
+      "reading": "コンピューター",
+      "recall_level": 2,
+      "word": "コンピューター"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "movie",
+      "part_of_speech": "noun",
+      "reading": "えいが",
+      "recall_level": 2,
+      "word": "映画"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "place",
+      "part_of_speech": "noun",
+      "reading": "ところ",
+      "recall_level": 2,
+      "word": "所"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
       "meaning": "I, me",
       "part_of_speech": "noun",
       "reading": "わたし",
       "recall_level": 2,
       "word": "私"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "history",
+      "part_of_speech": "noun",
+      "reading": "れきし",
+      "recall_level": 2,
+      "word": "歴史"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "friend",
+      "part_of_speech": "noun",
+      "reading": "ともだち",
+      "recall_level": 2,
+      "word": "友達"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "travel",
+      "part_of_speech": "noun",
+      "reading": "りょこう",
+      "recall_level": 2,
+      "word": "旅行"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "sea",
+      "part_of_speech": "noun",
+      "reading": "うみ",
+      "recall_level": 2,
+      "word": "海"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "English language",
+      "part_of_speech": "noun",
+      "reading": "えいご",
+      "recall_level": 2,
+      "word": "英語"
     }
   ]
 }
