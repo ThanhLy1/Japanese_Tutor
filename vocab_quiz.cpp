@@ -1,101 +1,42 @@
 #include <iostream>
-#include <sstream> // For commandStream;
+#include <sstream>
 #include <fstream>
 #include <random>
 #include <algorithm>
-#include <cstdlib> // For system("clear") on Unix-like systems, system()
+#include <cstdlib>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "../include/nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
-class VocabularyQuiz {
-public:
-    void loadVocabulary(const std::string& filename) {
-        std::ifstream file(filename);
-        file >> data_;
-        file.close();
-    }
+const std::string PYTHON_INTERPRETER = "/usr/bin/python3";
+const std::string PYTHON_SCRIPT = "voiceSynth.py";
 
-    void startQuiz() {
-    json& vocabulary = data_["vocabulary"]; 
-    std::shuffle(vocabulary.begin(), vocabulary.end(), std::mt19937(std::random_device()()));
-
-    int correctCount = 0;
-    int totalCount = 0;
-    int score = 0;
-    std::string lastWord = "";
-
-    for (json& word : vocabulary) {
-        std::string question = word["word"];
-        std::string answer = word["meaning"];
-
-        //clearConsole();
-        std::cout << "Question: " << question << std::endl;
-        std::string userAnswer;
-        std::cout << "Your answer (type 'q' to quit): ";
-        std::cin >> userAnswer;
-
-        if (userAnswer == "q") {
-            std::cout << "Quitting the quiz." << std::endl;
-            break;  // Exit the for loop
-        }
-
-        totalCount++;
-
-        if (userAnswer == answer) {
-            std::cout << "Correct!" << std::endl;
-            word["recall_level"] = word["recall_level"].get<int>() + 1;
-            correctCount++;
-            score += 10; // Increase score for correct answer
-            lastWord = question + " (" + answer + ")"; // Save the last correct word
-        } else {
-            std::cout << "Incorrect!" << std::endl;
-            std::cout << "The correct answer is: " << answer << std::endl;
-            word["recall_level"] = word["recall_level"].get<int>() - 1;
-            score -= 5; // Decrease score for incorrect answer
-            lastWord = question + " (" + answer + ")"; // Save the last incorrect word
-        }
-    }
-
-    //clearConsole();
-    std::cout << "Quiz completed!" << std::endl;
-    std::cout << "Total Questions: " << totalCount << std::endl;
-    std::cout << "Correct Answers: " << correctCount << std::endl;
-    std::cout << "Incorrect Answers: " << totalCount - correctCount << std::endl;
-    std::cout << "Score: " << score << std::endl;
-
-    //show the last word
-    if (!lastWord.empty()) {
-        std::cout << "Last Word: " << lastWord << std::endl;
-    }
-
-    saveVocabulary();
-}
-
-
+class Student {
 private:
-    void clearConsole() {
-    // Clear console command for Unix-like systems and Windows
-    std::cout << "\033[2J\033[1;1H";  // For Unix-like systems
-    // system("cls");  // For Windows
-}
+    std::string name_;
+    int score_;
 
-    void saveVocabulary() {
-        std::ofstream file("japanese_101.json");
-        file << data_.dump(2);
-        file.close();
-    }
+public:
+    Student(const std::string& name) : name_(name), score_(0) {}
 
-    json data_;
+    const std::string& getName() const { return name_; }
+    int getScore() const { return score_; }
+    
+    void updateScore(int points) { score_ += points; }
 };
 
 class AudioPlayer {
 public:
     AudioPlayer() {
-        SDL_Init(SDL_INIT_AUDIO);
-        Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+        if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+            std::cerr << "Failed to initialize SDL audio: " << SDL_GetError() << std::endl;
+        } else {
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+                std::cerr << "Failed to open audio: " << Mix_GetError() << std::endl;
+            }
+        }
     }
 
     ~AudioPlayer() {
@@ -105,12 +46,18 @@ public:
 
     bool loadAudio(const std::string& filePath) {
         music_ = Mix_LoadMUS(filePath.c_str());
-        return (music_ != nullptr);
+        if (!music_) {
+            std::cerr << "Failed to load audio: " << Mix_GetError() << std::endl;
+            return false;
+        }
+        return true;
     }
 
     void play() {
         if (music_) {
-            Mix_PlayMusic(music_, 1);  // 1 for loop playback
+            if (Mix_PlayMusic(music_, 1) < 0) {
+                std::cerr << "Failed to play audio: " << Mix_GetError() << std::endl;
+            }
         }
     }
 
@@ -130,35 +77,142 @@ private:
     Mix_Music* music_ = nullptr;
 };
 
+void executePythonScript(const std::string& pythonInterpreter, const std::string& pythonScript, const std::string& text, int presetId, int speaker) {
+    std::stringstream commandStream;
+    commandStream << pythonInterpreter << " " << pythonScript << " \"" << text << "\" " << presetId << " " << speaker;
+    std::string command = commandStream.str();
+
+    int result = system(command.c_str());
+
+    if (result == 0) {
+        std::cout << "Python script executed successfully." << std::endl;
+    } else {
+        std::cerr << "Error executing Python script. Return code: " << result << std::endl;
+    }
+}
+
+class Tutor {
+public:
+    void startLesson(Student& student) {
+        std::string pythonInterpreter = PYTHON_INTERPRETER;
+        std::string pythonScript = PYTHON_SCRIPT;
+        std::cout << "Welcome, " << student.getName() << "!" << std::endl;
+        std::cout << "Let's begin the Japanese lesson." << std::endl;
+
+        int presetId = 1;
+        int speaker = 17;
+
+        std::string text = "Welcome " + student.getName() + ". Let's begin the Japanese lesson.";
+
+        try {
+            executePythonScript(pythonInterpreter, pythonScript, text, presetId, speaker);
+        } catch (const std::exception& e) {
+            std::cerr << "Error executing Python script: " << e.what() << std::endl;
+            return;
+        }
+
+        AudioPlayer audioPlayer;
+
+        if (audioPlayer.loadAudio("audio.wav")) {
+            audioPlayer.play();
+        } else {
+            std::cerr << "Failed to load audio." << std::endl;
+        }
+
+        int lessonScore = 80;
+        student.updateScore(lessonScore);
+
+        std::cout << "Lesson completed!" << std::endl;
+        std::cout << "Your score: " << student.getScore() << std::endl;
+    }
+};
+
+class VocabularyQuiz {
+public:
+    void loadVocabulary(const std::string& filename) {
+        std::ifstream file(filename);
+        file >> data_;
+        file.close();
+    }
+
+    void startQuiz() {
+        json& vocabulary = data_["vocabulary"]; 
+        std::shuffle(vocabulary.begin(), vocabulary.end(), std::mt19937(std::random_device()()));
+
+        int correctCount = 0;
+        int totalCount = 0;
+        int score = 0;
+        std::string lastWord = "";
+
+        for (json& word : vocabulary) {
+            std::string question = word["word"];
+            std::string answer = word["meaning"];
+
+            std::cout << "Question: " << question << std::endl;
+            std::string userAnswer;
+            std::cout << "Your answer (type 'q' to quit): ";
+            std::cin >> userAnswer;
+
+            if (userAnswer == "q") {
+                std::cout << "Quitting the quiz." << std::endl;
+                break;
+            }
+
+            totalCount++;
+
+            if (userAnswer == answer) {
+                std::cout << "Correct!" << std::endl;
+                word["recall_level"] = word["recall_level"].get<int>() + 1;
+                correctCount++;
+                score += 10;
+                lastWord = question + " (" + answer + ")";
+            } else {
+                std::cout << "Incorrect!" << std::endl;
+                std::cout << "The correct answer is: " << answer << std::endl;
+                word["recall_level"] = word["recall_level"].get<int>() - 1;
+                score -= 5;
+                lastWord = question + " (" + answer + ")";
+            }
+        }
+
+        std::cout << "Quiz completed!" << std::endl;
+        std::cout << "Total Questions: " << totalCount << std::endl;
+        std::cout << "Correct Answers: " << correctCount << std::endl;
+        std::cout << "Incorrect Answers: " << totalCount - correctCount << std::endl;
+        std::cout << "Score: " << score << std::endl;
+
+        if (!lastWord.empty()) {
+            std::cout << "Last Word: " << lastWord << std::endl;
+        }
+
+        saveVocabulary();
+    }
+
+private:
+    void saveVocabulary() {
+        std::ofstream file("japanese_101.json");
+        file << data_.dump(2);
+        file.close();
+    }
+
+    json data_;
+};
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cout << "Usage: ./vocab_quiz <filename.json>" << std::endl;
         return 1;
     }
 
-    // Provide the absolute path to the Python interpreter and the Python script
-    std::string pythonInterpreter = "/usr/bin/python3";
-    std::string pythonScript = "voiceSynth.py";
-
-    // Parameters to pass to the Python script
     std::string text = "ユー オウド ミー 1万円";
     int presetId = 1;
-    int speaker = 18;
+    int speaker = 17;
 
-    // Create a command to execute the Python script with the parameters
-    std::stringstream commandStream;
-    commandStream << pythonInterpreter << " " << pythonScript << " \"" << text << "\" " << presetId << " " << speaker;
-    std::string command = commandStream.str();
+    executePythonScript(PYTHON_INTERPRETER, PYTHON_SCRIPT, text, presetId, speaker);
 
-     // Execute the Python script
-    int result = system(command.c_str());
-
-    // Check the return value for errors
-    if (result == 0) {
-        std::cout << "Python script executed successfully." << std::endl;
-    } else {
-        std::cerr << "Error executing Python script. Return code: " << result << std::endl;
-    }
+    Student student("John Doe");
+    Tutor tutor;
+    tutor.startLesson(student);
 
     std::string filename = argv[1];
 
@@ -167,7 +221,7 @@ int main(int argc, char* argv[]) {
     if (audioPlayer.loadAudio("audio.wav")) {
         audioPlayer.play();
     } else {
-        // Handle audio loading error
+        std::cerr << "Failed to load audio." << std::endl;
     }
 
     VocabularyQuiz quiz;
