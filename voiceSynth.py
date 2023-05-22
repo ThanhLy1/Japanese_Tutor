@@ -53,10 +53,23 @@ class TextToSpeech:
         else:
             print("Error:", response.text)
 
+    def get_presets(self):
+        url = 'http://127.0.0.1:50021/presets'
+        headers = {'accept': 'application/json'}
+
+        try:
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()  # Raises an exception for non-2xx status codes
+            data = response.json()
+            return data
+        except requests.exceptions.RequestException as e:
+            print(f"Error: {e}")
+            return {'error': str(e)}
+
 if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python3 script.py <text> <preset_id> <speaker>")
-        sys.exit(1)
+        sys.exit(1)  
 
     text = sys.argv[1]
     preset_id = int(sys.argv[2])
@@ -65,6 +78,13 @@ if __name__ == "__main__":
     tts = TextToSpeech(speaker)
     result = tts.audio_query(text)
     result2 = tts.audio_query_from_preset(text, preset_id)
+
+    presets = tts.get_presets()
+
+    if 'error' in presets:
+        print(presets['error'])
+    else:
+        print(presets)
 
     speed_scale = 1.0
     volume_scale = 1.0

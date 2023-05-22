@@ -10,4 +10,4 @@
 # Test case where a space is the leading char
 # test 3:  hi
 
-フーワイイズアセクシーボーイ？: new
+私はAIです。私の作成にはChatGPTと音声合成技術が使用されました.: new
