@@ -5,29 +5,36 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
 # SDL libraries
-SDL_LIBS = -lSDL2 -lSDL2_mixer
+LIBS = -lSDL2 -lSDL2_mixer
 
 # Source files
-SOURCES = vocab_quiz.cpp
+SRC = $(wildcard *.cpp)
+UTILITY_SRC = $(wildcard utility/*.cpp)
 
 # Object files
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJ = $(SRC:.cpp=.o)
+UTILITY_OBJ = $(UTILITY_SRC:.cpp=.o)
 
 # Executable name
 EXECUTABLE = vocab_quiz
+UTILITY_EXECUTABLE = utility/vocab_quiz
 
 .PHONY: all clean test
 
-all: $(EXECUTABLE)
+all: $(EXECUTABLE) $(UTILITY_EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(SDL_LIBS)
+$(EXECUTABLE): $(OBJ)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
 
-.cpp.o:
+$(UTILITY_EXECUTABLE): $(UTILITY_OBJ)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
+
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-test: $(EXECUTABLE)
+test: $(EXECUTABLE) $(UTILITY_EXECUTABLE)
 	./$(EXECUTABLE) japanese_101.json
+	./$(UTILITY_EXECUTABLE) japanese_101.json
 
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	$(RM) $(OBJ) $(EXECUTABLE) $(UTILITY_OBJ) $(UTILITY_EXECUTABLE) audio.wav

@@ -1,3 +1,17 @@
+///////////////////////////////////////////////////////////////////////////////
+///             Text to Speech - Spring 2023
+///
+///
+/// Build and test voice.cpp a Japanese text to speech synthesiser.
+/// 
+///
+/// @see     https://curl.se/libcurl/c/ 
+///          https://voicevox.github.io/voicevox_engine/api/
+///
+/// @file    voice.cpp
+/// @author  Thanh Ly  hien689@gmail.com
+///////////////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <string>
 #include <curl/curl.h>
@@ -47,9 +61,10 @@ public:
             CURLcode res = curl_easy_perform(curl);
             if(res != CURLE_OK) {
                 std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+                return {{"error", curl_easy_strerror(res)}};
             }
 
-            curl_slist_free_all(headers); 
+            curl_slist_free_all(headers);
         }
 
         return json::parse(response);
@@ -131,7 +146,7 @@ int main(int argc, char* argv[]) {
     params["text"] = curlRequest.urlEncode(text);
     params["speaker"] = "13";
     params["speedScale"] = "1.7";
-    params["volumeScale"] = "4.0";
+    params["volumeScale"] = "1.0";
     params["intonationScale"] = "1.5";
     params["prePhonemeLength"] = "1.0";
     params["postPhonemeLength"] = "1.0";
@@ -139,10 +154,16 @@ int main(int argc, char* argv[]) {
     std::string url1 = curlRequest.buildUrl("audio_query", params);
     json response1 = curlRequest.postRequest(url1, "");
 
+    if (response1.contains("error")) {
+        std::cerr << "Error in audio_query request: " << response1["error"] << std::endl;
+        return 1;
+    }
+
     std::string url2 = curlRequest.buildUrl("synthesis", params);
     std::string audioFilePath = "audio.wav";
     curlRequest.postRequestWithJson(url2, response1, audioFilePath);
 
+    
     std::cout << "Audio file saved: " << audioFilePath << std::endl;
 
     return 0;
