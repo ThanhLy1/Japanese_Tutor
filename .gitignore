@@ -7,6 +7,9 @@
 *.o
 *.obj
 
+# audio file
+audio.wav
+
 # Precompiled Headers
 *.gch
 *.pch

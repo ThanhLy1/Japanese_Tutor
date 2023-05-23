@@ -2,7 +2,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -Wall -Wextra
+CXXFLAGS = -std=c++11 -Wall -Wextra -I./include
 
 # Libraries
 LIBS = -lSDL2 -lSDL2_mixer -lstdc++ -lcurl
@@ -11,11 +11,11 @@ LIBS = -lSDL2 -lSDL2_mixer -lstdc++ -lcurl
 SRC = $(wildcard *.cpp utility/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
-# Executable name
+# Executable names
 EXECUTABLE = vocab_quiz
-UTILITY_EXECUTABLE = utility/vocab_quiz
+UTILITY_EXECUTABLE = utility/voice
 
-.PHONY: all clean test
+.PHONY: all clean
 
 all: $(EXECUTABLE) $(UTILITY_EXECUTABLE)
 
@@ -30,7 +30,9 @@ $(UTILITY_EXECUTABLE): $(filter utility/%, $(OBJ))
 
 test: all
 	./$(EXECUTABLE) japanese_101.json
-	./$(UTILITY_EXECUTABLE) japanese_101.json
+
+utility-test: $(UTILITY_EXECUTABLE)
+	./$(UTILITY_EXECUTABLE) 
 
 clean:
 	$(RM) $(OBJ) $(EXECUTABLE) $(UTILITY_EXECUTABLE) audio.wav

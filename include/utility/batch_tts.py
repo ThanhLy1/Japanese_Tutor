@@ -1,3 +1,18 @@
+###############################################################################
+###             Japanese Text to Speech - Spring 2023
+###
+###
+### Build and test batch_tts.py a Japanese text to speech synthesiser.
+### batch_tts.py is a script for batch create japanese text to speech
+### see words.txt on how to properly create a batch for synthesis.
+###
+### @see     https://voicevox.github.io/voicevox_engine/api/
+###          words.txt
+###
+### @file    batch_tts.py
+### @author  Thanh Ly  hien689@gmail.com
+###############################################################################
+
 import subprocess
 import os
 import requests
@@ -78,6 +93,7 @@ def convert_text_to_speech(word, speaker, preset_id):
     result = tts.audio_query(text)
     result2 = tts.audio_query_from_preset(text, preset_id)
 
+    #TODO: figure out why the params don't work.
     speed_scale = 1.0
     volume_scale = 1.0
     intonation_scale = 2.0
