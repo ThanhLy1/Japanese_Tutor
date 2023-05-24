@@ -1,5 +1,12 @@
 # Japanese_Tutor
 
+Builds:
+
+make:                                   Build vocab_quiz.cpp
+make test:                              Build and test vocab_quiz.cpp test_text_to_speech
+make utility-test:                      Build and test utility text_to_speech.cpp
+make u-test-args ARGS="こにちはAIです"   Build and test test_text_to_speech.cpp
+
 TODO: 
     Vocabulary Database: Maintain a database or file containing the Japanese vocabulary words, their meanings, pronunciation, and other relevant information. You can load this data into your program to provide word quizzes or learning exercises.
 

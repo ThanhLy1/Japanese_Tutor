@@ -1,8 +1,16 @@
 #include <iostream>
-#include "utility/tts.h"
+#include "tts.h"
 
-int main() {
-    std::string text = "私の声はAIとChatGPTによって合成されています。";
+
+
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " <text>" << std::endl;
+        return 1;
+    }
+
+    //std::string text = "私の声はAIとChatGPTによって合成されています。";
+    std::string text = argv[1];
 
     Voice voice;
 
@@ -24,7 +32,7 @@ int main() {
     }
 
     std::string url2 = voice.buildUrl("synthesis", params);
-    std::string audioFilePath = "audio.wav";
+    std::string audioFilePath = "test_audio.wav";
     voice.postRequestWithJson(url2, response1, audioFilePath);
 
     std::cout << "Audio file saved: " << audioFilePath << std::endl;
