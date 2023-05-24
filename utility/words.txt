@@ -1,0 +1,27 @@
+###############################################################################
+###               words - Spring 2023
+###               
+###
+### Batch file for batch_tts.py 
+###
+### @see     batch_tts.py
+###
+### @file   words.txt
+### @author Thanh Ly hien689@gmail.com
+###############################################################################
+
+
+
+# Usage: on the left side is the japanese word for translation it is delimit
+#        with : the right side will be the name of the audio file.
+# Test case where there's no name on the right
+# Test 1:
+# Test case where line is empty
+# 
+# Test case where name is a digit
+# Test 2: 1
+
+# Test case where a space is the leading char
+# test 3:  hi
+
+私はAIです。私の作成にはChatGPTと音声合成技術が使用されました.: new
