@@ -13,7 +13,7 @@ OBJ = $(SRC:.cpp=.o)
 
 # Executable names
 EXECUTABLE = vocab_quiz
-UTILITY_EXECUTABLE = utility/voice
+UTILITY_EXECUTABLE = test_text_to_speech
 
 .PHONY: all clean
 
@@ -32,7 +32,11 @@ test: all
 	./$(EXECUTABLE) japanese_101.json
 
 utility-test: $(UTILITY_EXECUTABLE)
-	./$(UTILITY_EXECUTABLE) 
+	./$(UTILITY_EXECUTABLE) "こにちはAIです"
 
+# Usage: make u-test-args ARGS="my text here"
+u-test-args: $(UTILITY_EXECUTABLE)
+	./$(UTILITY_EXECUTABLE) "$(ARGS)"
+ 
 clean:
 	$(RM) $(OBJ) $(EXECUTABLE) $(UTILITY_EXECUTABLE) audio.wav
