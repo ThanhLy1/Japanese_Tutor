@@ -7,7 +7,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "料理",
@@ -17,7 +17,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 0
+    "difficulty": 1.0
   },
   {
     "kanji": "ゲーム",
@@ -27,7 +27,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "歴史",
@@ -37,7 +37,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "大学院生",
@@ -47,7 +47,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "一年生",
@@ -57,7 +57,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "大学生",
@@ -67,7 +67,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "二年生",
@@ -77,7 +77,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "四年生",
@@ -87,7 +87,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "名前",
@@ -97,7 +97,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "私",
@@ -107,7 +107,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "日本人",
@@ -117,7 +117,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "インターネット／ネット",
@@ -127,7 +127,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "英語",
@@ -137,7 +137,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "アニメ",
@@ -147,7 +147,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "映画",
@@ -157,7 +157,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "先生",
@@ -167,7 +167,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "専攻",
@@ -177,7 +177,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "日本",
@@ -187,7 +187,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "経営学",
@@ -197,7 +197,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "言語学",
@@ -207,7 +207,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "ハワイ大学",
@@ -217,7 +217,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "サーフィン",
@@ -227,7 +227,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 3
+    "difficulty": 1.0
   },
   {
     "kanji": "コンピューター",
@@ -237,7 +237,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "日本語",
@@ -247,7 +247,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "観光学",
@@ -257,7 +257,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "犬",
@@ -267,7 +267,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 3
+    "difficulty": 1.0
   },
   {
     "kanji": "所",
@@ -277,7 +277,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "旅行",
@@ -287,7 +287,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "スポーツ",
@@ -297,7 +297,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "大学",
@@ -307,7 +307,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "音楽",
@@ -317,7 +317,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "こちら",
@@ -327,7 +327,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 0
+    "difficulty": 0.0
   },
   {
     "kanji": "国",
@@ -337,7 +337,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "学生",
@@ -347,7 +347,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "同じ",
@@ -357,7 +357,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "読書",
@@ -367,7 +367,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 1
+    "difficulty": 1.0
   },
   {
     "kanji": "三年生",
@@ -377,7 +377,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "海",
@@ -387,7 +387,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "スミス",
@@ -397,7 +397,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "趣味",
@@ -407,7 +407,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "テニス",
@@ -417,7 +417,7 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   },
   {
     "kanji": "近く",
@@ -427,6 +427,6 @@
     "part_of_speech": "noun",
     "dialogue": "1-2",
     "lesson": "1",
-    "difficulty": 2
+    "difficulty": 1.0
   }
 ]

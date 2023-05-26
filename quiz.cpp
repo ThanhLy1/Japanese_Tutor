@@ -191,9 +191,9 @@ private:
 
             file.close();
         } catch (const std::exception& e) {
-            std::cout << "Failed to parse quiz data file: " << e.what() << std::endl;
-        }
+        std::cout << "Failed to parse quiz data file: " << e.what() << std::endl;
     }
+}
 
     void savePersistenceData() {
         json jsonData;
