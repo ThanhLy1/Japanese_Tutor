@@ -17,6 +17,34 @@ Voice::~Voice() {
     curl_global_cleanup();
 }
 
+/** To satisfy rule of 5 there's no resource management so we don't need this
+Voice::Voice(const Voice& other) {
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+    // No need to perform a deep copy of `curl` handle as it is not owning any resources.
+}
+
+Voice& Voice::operator=(const Voice& other) {
+    if (this != &other) {
+        // No need to perform a deep copy of `curl` handle as it is not owning any resources.
+    }
+    return *this;
+}
+
+Voice::Voice(Voice&& other) noexcept : curl(other.curl) {
+    other.curl = nullptr;
+}
+
+Voice& Voice::operator=(Voice&& other) noexcept {
+    if (this != &other) {
+        curl = other.curl;
+        other.curl = nullptr;
+    }
+    return *this;
+}
+
+*/
+
 std::string Voice::urlEncode(const std::string& value) {
     char* encoded_value = curl_easy_escape(curl, value.c_str(), value.length());
     std::string result;

@@ -37,7 +37,9 @@ utility-test: $(UTILITY_EXECUTABLE)
 	./$(UTILITY_EXECUTABLE) "こにちはAIです"
 
 # Usage: make u-test-args ARGS="my text here"
-u-test-args: $(UTILITY_EXECUTABLE)
+u-test-args:
+	$(MAKE) $(UTILITY_EXECUTABLE)
+	@echo "Running $(UTILITY_EXECUTABLE) with ARGS=$(ARGS)"
 	./$(UTILITY_EXECUTABLE) "$(ARGS)"
 
 clean-vocab:
@@ -47,3 +49,4 @@ clean-utility:
 	$(RM) $(UTILITY_OBJ) $(UTILITY_EXECUTABLE) test_audio.wav
 
 clean: clean-vocab clean-utility
+	$(RM) $(VOCAB_OBJ) $(UTILITY_OBJ)

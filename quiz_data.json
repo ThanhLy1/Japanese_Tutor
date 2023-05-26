@@ -1,0 +1,432 @@
+[
+  {
+    "kanji": "友達",
+    "hiragana": "ともだち",
+    "romaji": "tomodachi",
+    "meaning": ["friend"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "料理",
+    "hiragana": "りょうり",
+    "romaji": "ryouri",
+    "meaning": ["cooking"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 0
+  },
+  {
+    "kanji": "ゲーム",
+    "hiragana": "ゲーム",
+    "romaji": "geemu",
+    "meaning": ["game"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "歴史",
+    "hiragana": "れきし",
+    "romaji": "rekishi",
+    "meaning": ["history"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "大学院生",
+    "hiragana": "だいがくいんせい",
+    "romaji": "daigakuinsei",
+    "meaning": ["graduate student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "一年生",
+    "hiragana": "いちねんせい",
+    "romaji": "ichinensei",
+    "meaning": ["first-year student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "大学生",
+    "hiragana": "だいがくせい",
+    "romaji": "daigakusei",
+    "meaning": ["college student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "二年生",
+    "hiragana": "にねんせい",
+    "romaji": "ninensei",
+    "meaning": ["second-year student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "四年生",
+    "hiragana": "よねんせい",
+    "romaji": "yonensei",
+    "meaning": ["fourth-year student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "名前",
+    "hiragana": "なまえ",
+    "romaji": "namae",
+    "meaning": ["name"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "私",
+    "hiragana": "わたし",
+    "romaji": "watashi",
+    "meaning": ["I", "me"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "日本人",
+    "hiragana": "にほんじん",
+    "romaji": "nihonjin",
+    "meaning": ["Japanese person"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "インターネット／ネット",
+    "hiragana": "インターネット／ネット",
+    "romaji": "intaanetto/netto",
+    "meaning": ["internet"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "英語",
+    "hiragana": "えいご",
+    "romaji": "eigo",
+    "meaning": ["English language"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "アニメ",
+    "hiragana": "アニメ",
+    "romaji": "anime",
+    "meaning": ["anime"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "映画",
+    "hiragana": "えいが",
+    "romaji": "eiga",
+    "meaning": ["movie"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "先生",
+    "hiragana": "せんせい",
+    "romaji": "sensei",
+    "meaning": ["teacher"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "専攻",
+    "hiragana": "せんこう",
+    "romaji": "senkou",
+    "meaning": ["major"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "日本",
+    "hiragana": "にほん",
+    "romaji": "nihon",
+    "meaning": ["Japan"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "経営学",
+    "hiragana": "けいえいがく",
+    "romaji": "keieigaku",
+    "meaning": ["business management"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "言語学",
+    "hiragana": "げんごがく",
+    "romaji": "gengogaku",
+    "meaning": ["linguistics"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "ハワイ大学",
+    "hiragana": "ハワイだいがく",
+    "romaji": "Hawai Daigaku",
+    "meaning": ["University of Hawaii"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "サーフィン",
+    "hiragana": "サーフィン",
+    "romaji": "saafin",
+    "meaning": ["surfing"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 3
+  },
+  {
+    "kanji": "コンピューター",
+    "hiragana": "コンピューター",
+    "romaji": "konpyuutaa",
+    "meaning": ["computer"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "日本語",
+    "hiragana": "にほんご",
+    "romaji": "nihongo",
+    "meaning": ["Japanese language"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "観光学",
+    "hiragana": "かんこうがく",
+    "romaji": "kankougaku",
+    "meaning": ["tourism studies"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "犬",
+    "hiragana": "いぬ",
+    "romaji": "inu",
+    "meaning": ["dog"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 3
+  },
+  {
+    "kanji": "所",
+    "hiragana": "ところ",
+    "romaji": "tokoro",
+    "meaning": ["place"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "旅行",
+    "hiragana": "りょこう",
+    "romaji": "ryokou",
+    "meaning": ["travel"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "スポーツ",
+    "hiragana": "スポーツ",
+    "romaji": "supootsu",
+    "meaning": ["sports"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "大学",
+    "hiragana": "だいがく",
+    "romaji": "daigaku",
+    "meaning": ["university"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "音楽",
+    "hiragana": "おんがく",
+    "romaji": "ongaku",
+    "meaning": ["music"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "こちら",
+    "hiragana": "こちら",
+    "romaji": "kochira",
+    "meaning": ["this person (polite)"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 0
+  },
+  {
+    "kanji": "国",
+    "hiragana": "くに",
+    "romaji": "kuni",
+    "meaning": ["country"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "学生",
+    "hiragana": "がくせい",
+    "romaji": "gakusei",
+    "meaning": ["student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "同じ",
+    "hiragana": "おなじ",
+    "romaji": "onaji",
+    "meaning": ["same"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "読書",
+    "hiragana": "どくしょ",
+    "romaji": "dokusho",
+    "meaning": ["reading"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 1
+  },
+  {
+    "kanji": "三年生",
+    "hiragana": "さんねんせい",
+    "romaji": "sannensei",
+    "meaning": ["third-year student"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "海",
+    "hiragana": "うみ",
+    "romaji": "umi",
+    "meaning": ["sea"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "スミス",
+    "hiragana": "スミス",
+    "romaji": "sumisu",
+    "meaning": ["Smith"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "趣味",
+    "hiragana": "しゅみ",
+    "romaji": "shumi",
+    "meaning": ["hobby"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "テニス",
+    "hiragana": "テニス",
+    "romaji": "tenisu",
+    "meaning": ["tennis"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  },
+  {
+    "kanji": "近く",
+    "hiragana": "ちかく",
+    "romaji": "chikaku",
+    "meaning": ["nearby"],
+    "part_of_speech": "noun",
+    "dialogue": "1-2",
+    "lesson": "1",
+    "difficulty": 2
+  }
+]

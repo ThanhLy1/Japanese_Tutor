@@ -4,12 +4,13 @@
 #include <random>
 #include <algorithm>
 #include <cstdlib>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
-#include "../include/nlohmann/json.hpp"
+#include "utility/AudioPlayer.h"
+#include "include/nlohmann/json.hpp"
 
+//TODO: Remove AudioPlayer class and link audio.h in utility
 using json = nlohmann::json;
 
+//TODO: We don't need python interpreter anymore as we made tts.cpp to handle this
 const std::string PYTHON_INTERPRETER = "/usr/bin/python3";
 const std::string PYTHON_SCRIPT = "voiceSynth.py";
 
@@ -25,56 +26,6 @@ public:
     int getScore() const { return score_; }
     
     void updateScore(int points) { score_ += points; }
-};
-
-class AudioPlayer {
-public:
-    AudioPlayer() {
-        if (SDL_Init(SDL_INIT_AUDIO) < 0) {
-            std::cerr << "Failed to initialize SDL audio: " << SDL_GetError() << std::endl;
-        } else {
-            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-                std::cerr << "Failed to open audio: " << Mix_GetError() << std::endl;
-            }
-        }
-    }
-
-    ~AudioPlayer() {
-        Mix_CloseAudio();
-        SDL_Quit();
-    }
-
-    bool loadAudio(const std::string& filePath) {
-        music_ = Mix_LoadMUS(filePath.c_str());
-        if (!music_) {
-            std::cerr << "Failed to load audio: " << Mix_GetError() << std::endl;
-            return false;
-        }
-        return true;
-    }
-
-    void play() {
-        if (music_) {
-            if (Mix_PlayMusic(music_, 1) < 0) {
-                std::cerr << "Failed to play audio: " << Mix_GetError() << std::endl;
-            }
-        }
-    }
-
-    void stop() {
-        Mix_HaltMusic();
-    }
-
-    void pause() {
-        Mix_PauseMusic();
-    }
-
-    void resume() {
-        Mix_ResumeMusic();
-    }
-
-private:
-    Mix_Music* music_ = nullptr;
 };
 
 void executePythonScript(const std::string& pythonInterpreter, const std::string& pythonScript, const std::string& text, int presetId, int speaker) {
