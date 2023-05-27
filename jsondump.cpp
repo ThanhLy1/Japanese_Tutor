@@ -220,6 +220,58 @@ public:
     }
 };
 
+class Student {
+private:
+    std::string name_;
+    int score_;
+
+public:
+    Student(const std::string& name) : name_(name), score_(0) {}
+
+    const std::string& getName() const { return name_; }
+    int getScore() const { return score_; }
+
+    void updateScore(int points) { score_ += points; }
+
+    void saveToPersistenceFile(const std::string& filename) const {
+        json jsonData = {
+            {"name", name_},
+            {"score", score_}
+        };
+
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            file << std::setw(4) << jsonData << std::endl;
+            std::cout << "Student data saved to persistence file." << std::endl;
+        } else {
+            std::cerr << "Failed to open persistence file for writing." << std::endl;
+        }
+    }
+
+    void loadFromPersistenceFile(const std::string& filename) {
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            json jsonData;
+            try {
+                file >> jsonData;
+            } catch (const std::exception& e) {
+                std::cerr << "Failed to parse JSON from persistence file: " << e.what() << std::endl;
+                return;
+            }
+
+            if (jsonData.contains("name") && jsonData.contains("score")) {
+                name_ = jsonData["name"];
+                score_ = jsonData["score"];
+                std::cout << "Student data loaded from persistence file." << std::endl;
+            } else {
+                std::cerr << "Invalid JSON data in persistence file." << std::endl;
+            }
+        } else {
+            std::cerr << "Failed to open persistence file for reading." << std::endl;
+        }
+    }
+};
+
 class Quiz {
 private:
     std::vector<Vocab> vocabList;
@@ -228,6 +280,7 @@ private:
     Ebisu ebisuModel;
     int totalQuestions = 0;
     int correctAnswers = 0;
+    int corectAnswers;
 
 public:
     Quiz() {
@@ -235,6 +288,10 @@ public:
         generator = std::default_random_engine(std::rand());
     }
 
+    int getCorrectAnswers() const {
+        return correctAnswers;
+    }
+    
     bool loadQuiz(const std::string& filename) {
         std::ifstream file(filename);
         if (!file) {
@@ -330,73 +387,104 @@ public:
         }
     }
 
-    void saveQuizState()
-    {
+    void saveQuizState(const std::string& filename, const Student& student) const {
         json quizState;
         quizState["total_questions"] = totalQuestions;
         quizState["correct_answers"] = correctAnswers;
         quizState["vocab_list"] = json::array(); // Create an empty JSON array
 
         // Convert the vocabList vector to a JSON array
-        for (const auto& vocab : vocabList)
-        {
+        for (const auto& vocab : vocabList) {
             quizState["vocab_list"].push_back(vocab.toJson());
         }
 
-        std::ofstream file("quiz_state.json");
-        if (file.is_open())
-        {
-            file << std::setw(4) << quizState << std::endl;
-            file.close();
+        json studentData = {
+            {"name", student.getName()},
+            {"score", student.getScore()}
+        };
+
+        json jsonData = {
+            {"student", studentData},
+            {"quiz_state", quizState}
+        };
+
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            file << std::setw(4) << jsonData << std::endl;
             std::cout << "Quiz state saved." << std::endl;
-        }
-        else
-        {
-            std::cout << "Unable to open file for saving quiz state." << std::endl;
+        } else {
+            std::cerr << "Unable to open file for saving quiz state." << std::endl;
         }
     }
 
-    void loadQuizState()
-    {
-        std::ifstream file("quiz_state.json");
-        if (!file.is_open())
-        {
-            std::cout << "No quiz state found. Starting a fresh quiz." << std::endl;
-            return;
-        }
-
-        json quizData;
-        try
-        {
-            file >> quizData;
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << "Failed to parse quiz state: " << e.what() << std::endl;
-            return;
-        }
-
-        if (quizData.contains("total_questions") && quizData.contains("correct_answers") && quizData.contains("vocab_list"))
-        {
-            totalQuestions = quizData["total_questions"];
-            correctAnswers = quizData["correct_answers"];
-
-            // Convert the JSON array to a vector of Vocab objects
-            for (const auto& vocabData : quizData["vocab_list"])
-            {
-                Vocab vocab(vocabData);
-                vocabList.push_back(vocab);
+    void loadQuizState(const std::string& filename, Student& student) {
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            json jsonData;
+            try {
+                file >> jsonData;
+            } catch (const std::exception& e) {
+                std::cerr << "Failed to parse quiz state: " << e.what() << std::endl;
+                return;
             }
 
-            std::cout << "Quiz state loaded." << std::endl;
-        }
-        else
-        {
-            std::cerr << "Invalid quiz state data." << std::endl;
+            if (jsonData.contains("student") && jsonData.contains("quiz_state")) {
+                json studentData = jsonData["student"];
+                if (studentData.contains("name") && studentData.contains("score")) {
+                    studentData["name"].get_to(student.getName());
+                    studentData["score"].get_to(student.getScore());
+                    std::cout << "Student data loaded from quiz state." << std::endl;
+                } else {
+                    std::cerr << "Invalid student data in quiz state." << std::endl;
+                }
+
+                json quizState = jsonData["quiz_state"];
+                if (quizState.contains("total_questions") && quizState.contains("correct_answers") && quizState.contains("vocab_list")) {
+                    totalQuestions = quizState["total_questions"];
+                    correctAnswers = quizState["correct_answers"];
+
+                    // Convert the JSON array to a vector of Vocab objects
+                    for (const auto& vocabData : quizState["vocab_list"]) {
+                        Vocab vocab(vocabData);
+                        vocabList.push_back(vocab);
+                    }
+
+                    std::cout << "Quiz state loaded." << std::endl;
+                } else {
+                    std::cerr << "Invalid quiz state data." << std::endl;
+                }
+            } else {
+                std::cerr << "Invalid quiz state JSON structure." << std::endl;
+            }
+        } else {
+            std::cout << "No quiz state found. Starting a fresh quiz." << std::endl;
         }
     }
 
 };
+
+class Tutor {
+public:
+    void startLesson(Student& student) {
+        std::cout << "Welcome, " << student.getName() << "!" << std::endl;
+        std::cout << "Let's begin the lesson." << std::endl;
+
+        std::string persistenceFilename = student.getName() + "_quiz_state.json";
+        
+        Quiz myQuiz;
+        myQuiz.loadQuiz("quiz_data.json");
+        myQuiz.loadQuizState(persistenceFilename);  // Load the quiz state before starting the quiz
+        myQuiz.startQuiz();
+        myQuiz.printStatistics();
+        myQuiz.saveQuizState(persistenceFilename);  // Save the quiz state after finishing the quiz
+
+        student.updateScore(myQuiz.getCorrectAnswers());
+
+        std::cout << "Lesson completed!" << std::endl;
+        std::cout << "Your score: " << student.getScore() << std::endl;
+    }
+};
+
 
 void dumpToJsonFile(const std::vector<Vocab>& vocabList) {
     json jsonData = json::array();
@@ -472,12 +560,17 @@ int main() {
     printJsonFile("quiz_data.json");
     */
 
-    Quiz myQuiz;
-    myQuiz.loadQuiz("quiz_data.json");
-    myQuiz.loadQuizState();  // Load the quiz state before starting the quiz
-    myQuiz.startQuiz();
-    myQuiz.printStatistics();
-    myQuiz.saveQuizState();  // Save the quiz state after finishing the quiz
+     Quiz myQuiz;
 
+    std::string studentName;
+    std::cout << "Enter your name: ";
+    std::getline(std::cin, studentName);
+
+    Student student(studentName);
+    Tutor tutor;
+    tutor.startLesson(student);
+
+    // Access and print the student's score
+    std::cout << "Final score: " << student.getScore() << std::endl;
     return 0;
 }
