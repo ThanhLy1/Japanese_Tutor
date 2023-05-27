@@ -533,7 +533,7 @@ void printJsonFile(const std::string& filename) {
 
 int main() {
 
-        /*
+    /*
     // Load the data from the "quiz_data.json" file
     std::vector<Vocab> vocabList;
     Vocab vocab;

@@ -17,14 +17,22 @@ UTILITY_SRC = utility/test_text_to_speech.cpp utility/tts.cpp
 UTILITY_OBJ = $(UTILITY_SRC:.cpp=.o)
 UTILITY_EXECUTABLE = test_text_to_speech
 
-.PHONY: all clean-vocab clean-utility
+# Source and object file for main
+MAIN_SRC = main.cpp
+MAIN_OBJ = $(MAIN_SRC:.cpp=.o)
+MAIN_EXECUTABLE = main
 
-all: $(VOCAB_EXECUTABLE) $(UTILITY_EXECUTABLE)
+.PHONY: all clean-vocab clean-utility clean-main
+
+all: $(VOCAB_EXECUTABLE) $(UTILITY_EXECUTABLE) $(MAIN_EXECUTABLE)
 
 $(VOCAB_EXECUTABLE): $(VOCAB_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
 
 $(UTILITY_EXECUTABLE): $(UTILITY_OBJ)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
+
+$(MAIN_EXECUTABLE): $(MAIN_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
 
 %.o: %.cpp
@@ -48,5 +56,8 @@ clean-vocab:
 clean-utility:
 	$(RM) $(UTILITY_OBJ) $(UTILITY_EXECUTABLE) test_audio.wav
 
-clean: clean-vocab clean-utility
-	$(RM) $(VOCAB_OBJ) $(UTILITY_OBJ)
+clean-main:
+	$(RM) $(MAIN_OBJ) $(MAIN_EXECUTABLE)
+
+clean: clean-vocab clean-utility clean-main
+	$(RM) $(VOCAB_OBJ) $(UTILITY_OBJ) $(MAIN_OBJ)

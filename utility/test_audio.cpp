@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "utility/AudioPlayer.h"
+#include "AudioPlayer.h"
 
 int main() {
     // Create an instance of AudioPlayer
