@@ -6,6 +6,7 @@
 #include <ctime>
 #include <iterator>
 #include <algorithm>
+#include <iomanip>
 #include <boost/math/special_functions/beta.hpp>
 #include "include/nlohmann/json.hpp"
 
@@ -49,7 +50,7 @@ public:
         alpha = alphaPosterior;
         beta = betaPosterior;
         t = tPosterior;
-        
+
         return tPosterior;  // Return the new t-value
     }
 
@@ -155,6 +156,19 @@ public:
         }
     }
 
+    json toJson() const {
+        json vocabJson;
+        vocabJson["kanji"] = kanji;
+        vocabJson["hiragana"] = hiragana;
+        vocabJson["romaji"] = romaji;
+        vocabJson["meaning"] = meaning;
+        vocabJson["part_of_speech"] = partOfSpeech;
+        vocabJson["dialogue"] = dialogue;
+        vocabJson["lesson"] = lesson;
+        vocabJson["difficulty"] = difficulty;
+        return vocabJson;
+    }
+
     // Getter methods
     std::string getKanji() const { return kanji; }
     std::string getHiragana() const { return hiragana; }
@@ -227,6 +241,7 @@ public:
             std::cerr << "Failed to open file: " << filename << std::endl;
             return false;
         }
+
         json jsonData;
         file >> jsonData;
         if (jsonData.is_array()) {
@@ -248,13 +263,13 @@ public:
             std::getline(std::cin, userAnswer);
 
             // Check if the user wants to quit
-        std::string answerLower = userAnswer;
-        std::transform(answerLower.begin(), answerLower.end(), answerLower.begin(), ::tolower);
-        answerLower.erase(std::remove_if(answerLower.begin(), answerLower.end(), ::isspace), answerLower.end());
-        if (answerLower == "q" || answerLower == "quit") {
-            std::cout << "Quiz terminated by the user." << std::endl;
-            break;  // Exit the loop
-        }
+            std::string answerLower = userAnswer;
+            std::transform(answerLower.begin(), answerLower.end(), answerLower.begin(), ::tolower);
+            answerLower.erase(std::remove_if(answerLower.begin(), answerLower.end(), ::isspace), answerLower.end());
+            if (answerLower == "q" || answerLower == "quit") {
+                std::cout << "Quiz terminated by the user." << std::endl;
+                break;  // Exit the loop
+            }
             processAnswer(vocab, userAnswer);
         }
     }
@@ -268,6 +283,9 @@ public:
         std::transform(answerLower.begin(), answerLower.end(), answerLower.begin(), ::tolower);
         answerLower.erase(std::remove_if(answerLower.begin(), answerLower.end(), ::isspace), answerLower.end());
 
+        // Replace '-' with space
+        std::replace(answerLower.begin(), answerLower.end(), '-', ' ');
+        
         // Check if the user wants to quit
         if (answerLower == "q" || answerLower == "quit") {
             std::cout << "Quiz terminated by the user." << std::endl;
@@ -284,9 +302,11 @@ public:
             }
         }
 
-        std::cout << (isCorrect ? "Correct!" : "Incorrect.") << std::endl;
         if (isCorrect) {
+            std::cout << "Correct!" << std::endl;
             correctAnswers++;
+        } else {
+            std::cout << "Incorrect. The correct answer is: " << vocab.correctAnswer() << std::endl;
         }
         totalQuestions++;
         double success = isCorrect ? 1.0 : 0.0;
@@ -294,7 +314,7 @@ public:
     }
 
     Vocab getRandomVocab() {
-        if(vocabList.empty()){
+        if (vocabList.empty()) {
             throw std::runtime_error("vocabList is empty!");
         }
         int index = distribution(generator);
@@ -306,9 +326,76 @@ public:
         std::cout << "Correct answers: " << correctAnswers << std::endl;
         if (totalQuestions > 0) {
             double percentage = 100.0 * correctAnswers / totalQuestions;
-            std::cout << "Accuracy: " << percentage << "%" << std::endl;
+            std::cout << "Accuracy: " << std::fixed << std::setprecision(2) << percentage << "%" << std::endl;
         }
     }
+
+    void saveQuizState()
+    {
+        json quizState;
+        quizState["total_questions"] = totalQuestions;
+        quizState["correct_answers"] = correctAnswers;
+        quizState["vocab_list"] = json::array(); // Create an empty JSON array
+
+        // Convert the vocabList vector to a JSON array
+        for (const auto& vocab : vocabList)
+        {
+            quizState["vocab_list"].push_back(vocab.toJson());
+        }
+
+        std::ofstream file("quiz_state.json");
+        if (file.is_open())
+        {
+            file << std::setw(4) << quizState << std::endl;
+            file.close();
+            std::cout << "Quiz state saved." << std::endl;
+        }
+        else
+        {
+            std::cout << "Unable to open file for saving quiz state." << std::endl;
+        }
+    }
+
+    void loadQuizState()
+    {
+        std::ifstream file("quiz_state.json");
+        if (!file.is_open())
+        {
+            std::cout << "No quiz state found. Starting a fresh quiz." << std::endl;
+            return;
+        }
+
+        json quizData;
+        try
+        {
+            file >> quizData;
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "Failed to parse quiz state: " << e.what() << std::endl;
+            return;
+        }
+
+        if (quizData.contains("total_questions") && quizData.contains("correct_answers") && quizData.contains("vocab_list"))
+        {
+            totalQuestions = quizData["total_questions"];
+            correctAnswers = quizData["correct_answers"];
+
+            // Convert the JSON array to a vector of Vocab objects
+            for (const auto& vocabData : quizData["vocab_list"])
+            {
+                Vocab vocab(vocabData);
+                vocabList.push_back(vocab);
+            }
+
+            std::cout << "Quiz state loaded." << std::endl;
+        }
+        else
+        {
+            std::cerr << "Invalid quiz state data." << std::endl;
+        }
+    }
+
 };
 
 void dumpToJsonFile(const std::vector<Vocab>& vocabList) {
@@ -358,7 +445,7 @@ void printJsonFile(const std::string& filename) {
 
 int main() {
 
-    /*
+        /*
     // Load the data from the "quiz_data.json" file
     std::vector<Vocab> vocabList;
     Vocab vocab;
@@ -387,8 +474,10 @@ int main() {
 
     Quiz myQuiz;
     myQuiz.loadQuiz("quiz_data.json");
+    myQuiz.loadQuizState();  // Load the quiz state before starting the quiz
     myQuiz.startQuiz();
     myQuiz.printStatistics();
-    
+    myQuiz.saveQuizState();  // Save the quiz state after finishing the quiz
+
     return 0;
 }
