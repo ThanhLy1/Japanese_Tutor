@@ -2,7 +2,8 @@
 
 Builds:
 
-make:                                   Build vocab_quiz.cpp
+make:                                   Build everything
+make main:                              Build main.cpp
 make test:                              Build and test vocab_quiz.cpp test_text_to_speech
 make utility-test:                      Build and test utility text_to_speech.cpp
 make u-test-args ARGS="こにちはAIです"   Build and test test_text_to_speech.cpp

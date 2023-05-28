@@ -34,7 +34,5 @@ int main() {
     myQuiz.startQuiz();
     myQuiz.printStatistics();
     myQuiz.saveQuizState();  // Save the quiz state after finishing the quiz
-
-    myQuiz.runUnitTests();
     return 0;
 }

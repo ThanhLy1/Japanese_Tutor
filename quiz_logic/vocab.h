@@ -22,7 +22,7 @@ public:
     std::string getKanji() const;
     std::string getHiragana() const;
     std::string getRomaji() const;
-    std::vector<std::string> getMeaning() const;
+    std::vector<std::string> getEnglish() const;
     std::string getPartOfSpeech() const;
     std::string getDialogue() const;
     std::string getLesson() const;
@@ -31,7 +31,7 @@ public:
     void setKanji(const std::string& newKanji);
     void setHiragana(const std::string& newHiragana);
     void setRomaji(const std::string& newRomaji);
-    void setMeaning(const std::vector<std::string>& newMeaning);
+    void setEnglish(const std::vector<std::string>& newEnglish);
     void setPartOfSpeech(const std::string& newPartOfSpeech);
     void setDialogue(const std::string& newDialogue);
     void setLesson(const std::string& newLesson);
@@ -40,11 +40,11 @@ public:
     void printDetails() const;
     std::string correctAnswer() const;
 
-private:
+public: // change this back to private
     std::string kanji;
     std::string hiragana;
     std::string romaji;
-    std::vector<std::string> meaning;
+    std::vector<std::string> english;
     std::string partOfSpeech;
     std::string dialogue;
     std::string lesson;
@@ -57,7 +57,7 @@ Vocab::Vocab(const json& jsonData)
     : kanji(jsonData["kanji"]),
       hiragana(jsonData["hiragana"]),
       romaji(jsonData["romaji"]),
-      meaning(jsonData["meaning"].get<std::vector<std::string>>()),
+      english(jsonData["english"].get<std::vector<std::string>>()),
       partOfSpeech(jsonData["part_of_speech"]),
       dialogue(jsonData["dialogue"]),
       lesson(jsonData["lesson"]),
@@ -97,14 +97,17 @@ void Vocab::saveToPersistenceFile(const std::string& filename) const {
         {"kanji", kanji},
         {"hiragana", hiragana},
         {"romaji", romaji},
-        {"meaning", meaning},
+        {"english", english},
         {"part_of_speech", partOfSpeech},
         {"dialogue", dialogue},
         {"lesson", lesson},
         {"difficulty", difficulty}};
 
+    json arrayData = json::array();
+    arrayData.push_back(jsonData);
+
     try {
-        file << std::setw(4) << jsonData << std::endl;
+        file << std::setw(4) << arrayData << std::endl;
         std::cout << "Data saved to persistence file." << std::endl;
     } catch (const std::exception& e) {
         std::cout << "Failed to write to persistence file: " << e.what()
@@ -117,7 +120,7 @@ json Vocab::toJson() const {
     vocabJson["kanji"] = kanji;
     vocabJson["hiragana"] = hiragana;
     vocabJson["romaji"] = romaji;
-    vocabJson["meaning"] = meaning;
+    vocabJson["english"] = english;
     vocabJson["part_of_speech"] = partOfSpeech;
     vocabJson["dialogue"] = dialogue;
     vocabJson["lesson"] = lesson;
@@ -131,7 +134,7 @@ std::string Vocab::getHiragana() const { return hiragana; }
 
 std::string Vocab::getRomaji() const { return romaji; }
 
-std::vector<std::string> Vocab::getMeaning() const { return meaning; }
+std::vector<std::string> Vocab::getEnglish() const { return english; }
 
 std::string Vocab::getPartOfSpeech() const { return partOfSpeech; }
 
@@ -149,8 +152,8 @@ void Vocab::setHiragana(const std::string& newHiragana) {
 
 void Vocab::setRomaji(const std::string& newRomaji) { romaji = newRomaji; }
 
-void Vocab::setMeaning(const std::vector<std::string>& newMeaning) {
-    meaning = newMeaning;
+void Vocab::setMeaning(const std::vector<std::string>& newEnglish) {
+    english = newEnglish;
 }
 
 void Vocab::setPartOfSpeech(const std::string& newPartOfSpeech) {
@@ -170,8 +173,8 @@ void Vocab::printDetails() const {
     std::cout << "Hiragana: " << hiragana << std::endl;
     std::cout << "Romaji: " << romaji << std::endl;
 
-    std::cout << "Meaning(s): ";
-    for (const auto& m : meaning) {
+    std::cout << "English(s): ";
+    for (const auto& m : english) {
         std::cout << m << ", ";
     }
     std::cout << std::endl;
@@ -184,7 +187,7 @@ void Vocab::printDetails() const {
 
 std::string Vocab::correctAnswer() const {
     std::string answer = "";
-    for (const auto& m : meaning) {
+    for (const auto& m : english) {
         answer += m + ", ";
     }
     // remove the last comma and space
