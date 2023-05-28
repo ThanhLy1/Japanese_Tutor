@@ -228,22 +228,22 @@ void Quiz::startQuiz() {
     std::cout << "Select the test type:" << std::endl;
     std::cout << "1. Kanji to Hiragana" << std::endl;
     std::cout << "2. Hiragana to English" << std::endl;
-    std::cout << "3. Romaji to English" << std::endl;
-    std::cout << "4. English to Romaji" << std::endl;
+    std::cout << "3. Hiragana to Romaji" << std::endl;
+    std::cout << "4. English to Hiragana" << std::endl;
 
     int choice;
     std::cin >> choice;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
 
     std::map<int, std::string> testTypeMap = {
-        {1, "KanjiHiragana"},
-        {2, "Hiragana"},
-        {3, "Romaji"},
-        {4, "English"}
+        {1, "Kanji to Hiragana"},
+        {2, "Hiragana to English"},
+        {3, "Hiragana to Romaji"},
+        {4, "English to Hiragana"}
     };
 
     auto it = testTypeMap.find(choice);
-    testType = (it != testTypeMap.end()) ? it->second : "KanjiHiragana";
+    testType = (it != testTypeMap.end()) ? it->second : "Kanji to Hiragana";
 
     for (int i = 0; i < NUM_QUESTIONS; ++i) {
         Vocab vocab = getRandomVocab();
@@ -277,28 +277,32 @@ void Quiz::askQuestion(const Vocab& vocab) {
     std::string question;
     std::string correctAnswer;
 
-    if (testType == "KanjiHiragana") {
+    if (testType == "Kanji to Hiragana") {
         question = "Translate the following kanji to hiragana: ";
         correctAnswer = vocab.getHiragana();
+        std::cout << question << vocab.getKanji() << std::endl;
     }
-    else if (testType == "Hiragana") {
+    else if (testType == "Hiragana to English") {
         question = "Translate the following hiragana to English: ";
         correctAnswer = vocab.getEnglish()[0];
+        std::cout << question << vocab.getHiragana() << std::endl;
     }
-    else if (testType == "Romaji") {
+    else if (testType == "Hiragana to Romaji") {
         question = "Translate the following romaji to English: ";
-        correctAnswer = vocab.getEnglish()[0];
+        correctAnswer = vocab.getRomaji()[0];
+        std::cout << question << vocab.getHiragana() << std::endl;
     }
-    else if (testType == "English") {
+    else if (testType == "English to Hiragana") {
         question = "Translate the following English word to romaji: ";
-        correctAnswer = vocab.getRomaji();
+        correctAnswer = vocab.getHiragana();
+        std::cout << question << vocab.getEnglish()[0] << std::endl;
     }
     else {
         std::cout << "Invalid test type." << std::endl;
         return;
     }
 
-    std::cout << question << vocab.getKanji() << std::endl;
+    
 
     // Rest of the code...
 }
@@ -314,17 +318,17 @@ void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
 
     bool isCorrect = false;
 
-    if (testType == "KanjiHiragana") {
+    if (testType == "Kanji to Hiragana") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
     }
-    else if (testType == "Hiragana") {
+    else if (testType == "Hiragana to English") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
     }
-    else if (testType == "Romaji") {
+    else if (testType == "Hiragana to Romaji") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
     }
-    else if (testType == "English") {
-        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getRomaji());
+    else if (testType == "English to Hiragana") {
+        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
     }
     else {
         std::cout << "Invalid test type." << std::endl;
@@ -338,28 +342,35 @@ void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
     else {
         std::cout << "Incorrect. The correct answer is: " << getCorrectAnswer(vocab) << std::endl;
     }
-
     totalQuestions++;
     double success = isCorrect ? 1.0 : 0.0;
     ebisuModel.updateRecall(success, 1.0, vocab.getDifficulty());
 }
 
 bool Quiz::checkAnswer(const std::string& userAnswer, const std::string& correctAnswer) {
-    return userAnswer == correctAnswer;
+    // Convert both answers to lowercase and remove dashes
+    std::string lowerUserAnswer = userAnswer;
+    std::string lowerCorrectAnswer = correctAnswer;
+    std::transform(lowerUserAnswer.begin(), lowerUserAnswer.end(), lowerUserAnswer.begin(), ::tolower);
+    std::transform(lowerCorrectAnswer.begin(), lowerCorrectAnswer.end(), lowerCorrectAnswer.begin(), ::tolower);
+    lowerUserAnswer.erase(std::remove(lowerUserAnswer.begin(), lowerUserAnswer.end(), '-'), lowerUserAnswer.end());
+    lowerCorrectAnswer.erase(std::remove(lowerCorrectAnswer.begin(), lowerCorrectAnswer.end(), '-'), lowerCorrectAnswer.end());
+
+    return lowerUserAnswer == lowerCorrectAnswer;
 }
 
 std::string Quiz::getCorrectAnswer(const Vocab& vocab) {
-    if (testType == "KanjiHiragana") {
+    if (testType == "Kanji to Hiragana") {
         return vocab.getHiragana();
     }
-    else if (testType == "Hiragana") {
+    else if (testType == "Hiragana to English") {
         return vocab.getEnglish()[0];
     }
-    else if (testType == "Romaji") {
-        return vocab.getEnglish()[0];
-    }
-    else if (testType == "English") {
+    else if (testType == "Hiragana to Romaji") {
         return vocab.getRomaji();
+    }
+    else if (testType == "English to Hiragana") {
+        return vocab.getHiragana();
     }
     else {
         return "Invalid test type.";
@@ -460,6 +471,7 @@ bool Quiz::containsWhitespace(const std::string& str) {
     return str.find(' ') != std::string::npos;
 }
 
+// Checks if the string contains leading or trailing whitespace
 bool hasLeadingOrTrailingWhitespace(const std::string& str) {
     return !str.empty() && (str.front() == ' ' || str.back() == ' ');
 }
