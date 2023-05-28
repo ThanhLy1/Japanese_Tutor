@@ -152,7 +152,7 @@ void Vocab::setHiragana(const std::string& newHiragana) {
 
 void Vocab::setRomaji(const std::string& newRomaji) { romaji = newRomaji; }
 
-void Vocab::setMeaning(const std::vector<std::string>& newEnglish) {
+void Vocab::setEnglish(const std::vector<std::string>& newEnglish) {
     english = newEnglish;
 }
 
