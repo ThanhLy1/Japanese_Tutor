@@ -31,6 +31,7 @@ private:
     static const char QUIZ_STATE_FILE[];
 
 public:
+    //TODO: let user choose the amount of question
     Quiz() : vocabList_(), rd_(), generator_(rd_()), distribution_(), testType_(), 
     ebisuModel_(), totalQuestions_(0), correctAnswers_(0), NUM_QUESTIONS(10) {}
 
@@ -106,32 +107,29 @@ void Quiz::startQuiz() {
         std::cout << "Invalid test type. Quiz aborted." << std::endl;
         return;
     }
-    
+
     for (int i = 0; i < NUM_QUESTIONS; ++i) {
         Vocab vocab = getRandomVocab();
         askQuestion(vocab);
-        std::string userAnswer = getUserAnswer();
-        processAnswer(vocab, userAnswer);
     }
 }
 
 void Quiz::selectTestType() {
-    std::cout << "Select the test type:" << std::endl;
-    std::cout << "1. Kanji to Hiragana" << std::endl;
-    std::cout << "2. Hiragana to English" << std::endl;
-    std::cout << "3. Hiragana to Romaji" << std::endl;
-    std::cout << "4. English to Hiragana" << std::endl;
-
-    int choice;
-    std::cin >> choice;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
-
     std::map<int, std::string> testTypeMap = {
         {1, "Kanji to Hiragana"},
         {2, "Hiragana to English"},
         {3, "Hiragana to Romaji"},
         {4, "English to Hiragana"}
     };
+
+    std::cout << "Select the test type:" << std::endl;
+    for (const auto& testType : testTypeMap) {
+        std::cout << testType.first << ". " << testType.second << std::endl;
+    }
+
+    int choice;
+    std::cin >> choice;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
 
     auto it = testTypeMap.find(choice);
     if (it == testTypeMap.end()) {
@@ -144,9 +142,8 @@ void Quiz::selectTestType() {
 
 std::string Quiz::getUserAnswer() {
     std::string userAnswer;
-    bool isValidAnswer = false;
 
-    while (!isValidAnswer) {
+    while (true) {
         std::getline(std::cin, userAnswer);
 
         if (userAnswer.empty()) {
@@ -154,31 +151,25 @@ std::string Quiz::getUserAnswer() {
             continue;
         }
 
-        // Check if the user wants to quit
         std::string answerLower = toLowercaseAndTrim(userAnswer);
         if (answerLower == "q" || answerLower == "quit") {
             std::cout << "Quiz terminated by the user." << std::endl;
             saveQuizState();
-            exit(0);  // Need to change this for when you dont' need to exit.
+            // You may choose not to exit here, but handle the termination appropriately
+            exit(0);
         }
 
-        isValidAnswer = validateAnswer(userAnswer);
-
-        if (!isValidAnswer) {
-            std::cout << "Invalid answer. Please try again: ";
+        if (validateAnswer(userAnswer)) {
+            break;
         }
+
+        std::cout << "Invalid answer. Please try again: ";
     }
     return userAnswer;
 }
 
 void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
     std::string lowerAndTrimmedAnswer = toLowercaseAndTrim(userAnswer);
-
-    // Check if the user wants to quit
-    if (lowerAndTrimmedAnswer == "q" || lowerAndTrimmedAnswer == "quit") {
-        std::cout << "Quiz terminated by the user." << std::endl;
-        exit(0);
-    }
 
     if (lowerAndTrimmedAnswer == "") {
         std::cout << "Invalid answer. Please try again." << std::endl;
