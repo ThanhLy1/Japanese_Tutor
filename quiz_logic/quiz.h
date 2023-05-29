@@ -23,20 +23,32 @@ private:
     std::random_device rd_;
     std::mt19937 generator_;
     std::uniform_int_distribution<int> distribution_;
-    std::string testType_;
     Ebisu ebisuModel_;
+    std::string testType_;
     size_t totalQuestions_ = 0;
     int correctAnswers_ = 0;
-    const int NUM_QUESTIONS = 10; // Number of questions per quiz
+    const int NUM_QUESTIONS = 10;
     static const char QUIZ_STATE_FILE[];
 
 public:
     //TODO: let user choose the amount of question
-    Quiz() : vocabList_(), rd_(), generator_(rd_()), distribution_(), testType_(), 
-    ebisuModel_(), totalQuestions_(0), correctAnswers_(0), NUM_QUESTIONS(10) {}
+    Quiz()
+        : vocabList_(),
+          rd_(),
+          generator_(rd_()),
+          distribution_(),
+          ebisuModel_(),
+          testType_(),
+          totalQuestions_(0),
+          correctAnswers_(0),
+          NUM_QUESTIONS(10)
+    {}
 
     explicit Quiz(const std::vector<Vocab>& vocabList)
-        : vocabList_(vocabList), totalQuestions_(0), correctAnswers_(0) {}
+        : vocabList_(vocabList),
+          totalQuestions_(0),
+          correctAnswers_(0)
+    {}
 
     void addVocab(const Vocab& vocab) { vocabList_.push_back(vocab); }
     bool isFinished() const { return totalQuestions_ == vocabList_.size(); }
@@ -49,21 +61,24 @@ public:
     void processAnswer(const Vocab& vocab, const std::string& userAnswer);
     Vocab getRandomVocab();
     void printStatistics() const;
-    bool containsInvalidCharacters(const std::string& str);
-    bool containsWhitespace(const std::string& str);
-    bool hasLeadingOrTrailingWhitespace(const std::string& str);
+    bool validateAnswer(const std::string& answer);
     void saveQuizState();
     void loadQuizState();
 
-private:
+    // Needed for unit test otherwise it's protected class
+    //std::string testType_;
     bool checkAnswer(const std::string& userAnswer, const std::string& correctAnswer);
-    std::string getCorrectAnswer(const Vocab& vocab);
-    bool validateAnswer(const std::string& answer);
     std::string trim(const std::string& str, const char& trimChar = ' ');
     std::string toLowercaseAndTrim(const std::string& str);
-    
     void selectTestType();
+    std::string getCorrectAnswer(const Vocab& vocab);
     std::string getUserAnswer();
+    bool containsInvalidCharacters(const std::string& str);
+    bool containsWhitespace(const std::string& str);
+    bool hasLeadingOrTrailingWhitespace(const std::string& str);
+
+private:
+
 };
 
 const char Quiz::QUIZ_STATE_FILE[] = "quiz_state.json";
@@ -78,6 +93,10 @@ bool Quiz::loadQuiz(const std::string& filename) {
     nlohmann::json jsonData;
     try {
         file >> jsonData;
+        std::cout << "Loaded JSON data: "<< std::endl;
+    #ifndef DEBUG
+        //std::cout << "Loaded JSON data: " << jsonData.dump(4) << std::endl;
+    #endif
     } catch (const std::exception& e) {
         std::cerr << "Failed to parse quiz data: " << e.what() << std::endl;
         return false;
@@ -356,6 +375,7 @@ bool Quiz::validateAnswer(const std::string& answer) {
     return !lowerAndTrimmedAnswer.empty()
         && utf8::is_valid(lowerAndTrimmedAnswer.begin(), lowerAndTrimmedAnswer.end())
         && !hasLeadingOrTrailingWhitespace(trimmedAnswer)
+        && !containsInvalidCharacters(lowerAndTrimmedAnswer)
         && lowerAndTrimmedAnswer.find("--") == std::string::npos;
 }
 

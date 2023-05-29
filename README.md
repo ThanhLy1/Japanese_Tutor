@@ -11,7 +11,8 @@ make u-test-args ARGS="こにちはAIです"   Build and test test_text_to_speec
  Terminal Compile:   
  unit_test_ebisu, unit_test_quiz, unit_test_vocab
 
- g++ -o unit_test_vocap unit_test_vocap.cpp -lgtest -lgtest_main -pthread -Iinclude
+g++ -o unit_test_vocap unit_test_vocap.cpp -lgtest -lgtest_main -pthread -Iinclude
+g++ -o unit_test_quiz unit_test_quiz.cpp -lgtest -lgtest_main -pthread -Iinclude
 
 TODO: 
     Vocabulary Database: Maintain a database or file containing the Japanese vocabulary words, their meanings, pronunciation, and other relevant information. You can load this data into your program to provide word quizzes or learning exercises.
