@@ -1,14 +1,17 @@
-#ifndef QUIZ_H
-#define QUIZ_H
+#ifndef QUIZ_H_
+#define QUIZ_H_
 
-#include <string>
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include <random>
-#include <fstream>
-#include <iostream>
 #include <algorithm>
 #include <cctype>
 #include <regex>
+#include <stdexcept>
+#include <limits>
+#include <iomanip>
+#include <map>
 
 #include "ebisu.h"
 #include "vocab.h"
@@ -16,180 +19,53 @@
 
 class Quiz {
 private:
-    std::vector<Vocab> vocabList;
-    std::random_device rd;
-    std::mt19937 generator;
-    std::uniform_int_distribution<int> distribution;
-    std::string testType;
-    Ebisu ebisuModel;
-    int totalQuestions = 0;
-    int correctAnswers = 0;
+    std::vector<Vocab> vocabList_;
+    std::random_device rd_;
+    std::mt19937 generator_;
+    std::uniform_int_distribution<int> distribution_;
+    std::string testType_;
+    Ebisu ebisuModel_;
+    size_t totalQuestions_ = 0;
+    int correctAnswers_ = 0;
     const int NUM_QUESTIONS = 10; // Number of questions per quiz
-    const std::string QUIZ_STATE_FILE = "quiz_state.json"; // File name for quiz state
+    static const char QUIZ_STATE_FILE[];
 
 public:
-    /**
-     * Default constructor for Quiz.
-     */
-    Quiz();
+    Quiz() : vocabList_(), rd_(), generator_(rd_()), distribution_(), testType_(), 
+    ebisuModel_(), totalQuestions_(0), correctAnswers_(0), NUM_QUESTIONS(10) {}
 
-    /**
-     * Loads the quiz from the specified file.
-     * @param filename The filename of the quiz data.
-     * @return True if the quiz was loaded successfully, false otherwise.
-     */
+    explicit Quiz(const std::vector<Vocab>& vocabList)
+        : vocabList_(vocabList), totalQuestions_(0), correctAnswers_(0) {}
+
+    void addVocab(const Vocab& vocab) { vocabList_.push_back(vocab); }
+    bool isFinished() const { return totalQuestions_ == vocabList_.size(); }
+    bool checkAnswer(const Vocab& vocab, const std::string& answer);
+    int getTotalQuestions() const;
+    int getCorrectAnswers() const;
     bool loadQuiz(const std::string& filename);
-
-    /**
-     * Starts the quiz and interacts with the user.
-     */
     void startQuiz();
-
-    /**
-     * Starts a multiple-choice quiz.
-     */
-    void startMultipleChoiceQuiz();
-
-    /**
-     * Starts a fill-in-the-blank quiz.
-     */
-    void startFillInTheBlankQuiz();
-
-    /**
-     * Starts a listening comprehension exercise.
-     */
-    void startListeningComprehensionExercise();
-
-    /**
-     * Asks a question based on the given vocab.
-     * @param vocab The Vocab object representing the question.
-     */
     void askQuestion(const Vocab& vocab);
-
-    /**
-     * Processes the user's answer for the given vocab.
-     * @param vocab The Vocab object representing the question.
-     * @param userAnswer The user's answer.
-     */
     void processAnswer(const Vocab& vocab, const std::string& userAnswer);
-
-    /**
-     * Retrieves a random Vocab object from the vocabList.
-     * @return A random Vocab object.
-     */
     Vocab getRandomVocab();
-
-    /**
-     * Prints the quiz statistics, including total questions and accuracy.
-     */
     void printStatistics() const;
-
-    /**
-     * Saves the quiz state to a file.
-     */
+    bool containsInvalidCharacters(const std::string& str);
+    bool containsWhitespace(const std::string& str);
+    bool hasLeadingOrTrailingWhitespace(const std::string& str);
     void saveQuizState();
-
-    /**
-     * Loads the quiz state from a file.
-     */
     void loadQuizState();
 
-    /**
-     * Checks if the string contains invalid characters.
-     * @param str The string to check.
-     * @return True if the string contains invalid characters, false otherwise.
-     */
-    bool containsInvalidCharacters(const std::string& str);
-
-    bool containsWhitespace(const std::string& str);
-
-
-    /**
-     * Validates the user's answer to ensure it is not empty or contains only whitespace.
-     * @param answer The user's answer.
-     * @return True if the answer is valid, false otherwise.
-     */
-    bool validateAnswer(const std::string& answer);
-    
-        /**
-     * Trims leading and trailing whitespace from a string.
-     * @param str The string to trim.
-     * @param trimChar The character to trim (default is ' ').
-     * @return The trimmed string.
-     */
-    std::string trim(const std::string& str, const char& trimChar = ' ');
-
-    /**
-     * Converts a string to lowercase and trims leading and trailing whitespace.
-     * @param str The string to convert.
-     * @return The converted string.
-     */
-    std::string toLowercaseAndTrim(const std::string& str);
-
-
-public: // change this to private back
-    // Function declarations for quiz modes
-    void askMultipleChoiceQuestion(const Vocab& vocab);
-    void processMultipleChoiceAnswer(const Vocab& vocab, const std::string& userAnswer);
-    void askFillInTheBlankQuestion(const Vocab& vocab);
-    void processFillInTheBlankAnswer(const Vocab& vocab, const std::string& userAnswer);
-    void askListeningComprehensionQuestion(const Vocab& vocab);
-    void processListeningComprehensionAnswer(const Vocab& vocab, const std::string& userAnswer);
-
-    /**
-     * Checks if the user's answer is correct.
-     * @param userAnswer The user's answer.
-     * @param correctAnswer The correct answer.
-     * @return True if the user's answer is correct, false otherwise.
-     */
+private:
     bool checkAnswer(const std::string& userAnswer, const std::string& correctAnswer);
-
-    /**
-     * Retrieves the correct answer based on the test type.
-     * @param vocab The Vocab object.
-     * @param testType The type of test being conducted.
-     * @return The correct answer.
-     */
     std::string getCorrectAnswer(const Vocab& vocab);
+    bool validateAnswer(const std::string& answer);
+    std::string trim(const std::string& str, const char& trimChar = ' ');
+    std::string toLowercaseAndTrim(const std::string& str);
+    
+    void selectTestType();
+    std::string getUserAnswer();
 };
 
-void Quiz::askMultipleChoiceQuestion(const Vocab& vocab) {
-    // code for asking a multiple choice question
-    std::cout << "Translate the following word to English: "
-        << vocab.getKanji() << std::endl;
-    std::cout << "1. Option 1" << std::endl;
-    std::cout << "2. Option 2" << std::endl;
-    std::cout << "3. Option 3" << std::endl;
-    std::cout << "4. Option 4" << std::endl;
-}
-
-void Quiz::processMultipleChoiceAnswer(const Vocab& vocab, const std::string& userAnswer) {
-    // code for processing a multiple choice answer
-    // For simplicity, let's assume that user's answer is the number of correct option
-}
-
-void Quiz::askFillInTheBlankQuestion(const Vocab& vocab) {
-    // code for asking a fill-in-the-blank question
-    std::cout << "Fill in the blank with the correct translation: ";
-}
-
-void Quiz::processFillInTheBlankAnswer(const Vocab& vocab, const std::string& userAnswer) {
-    // code for processing a fill-in-the-blank answer
-}
-
-void Quiz::askListeningComprehensionQuestion(const Vocab& vocab) {
-    // code for asking a listening comprehension question
-    std::cout << "Listen to the following audio clip and write the English translation: "
-        << std::endl;
-    // Play audio clip here
-}
-
-void Quiz::processListeningComprehensionAnswer(const Vocab& vocab, const std::string& userAnswer) {
-    // code for processing a listening comprehension answer
-
-}
-
-Quiz::Quiz() : generator(rd()) {}
+const char Quiz::QUIZ_STATE_FILE[] = "quiz_state.json";
 
 bool Quiz::loadQuiz(const std::string& filename) {
     std::ifstream file(filename);
@@ -198,7 +74,7 @@ bool Quiz::loadQuiz(const std::string& filename) {
         return false;
     }
 
-    json jsonData;
+    nlohmann::json jsonData;
     try {
         file >> jsonData;
     } catch (const std::exception& e) {
@@ -210,7 +86,7 @@ bool Quiz::loadQuiz(const std::string& filename) {
         for (const auto& vocabData : jsonData) {
             try {
                 Vocab vocab(vocabData);
-                vocabList.push_back(vocab);
+                vocabList_.push_back(vocab);
             } catch (const std::exception& e) {
                 std::cerr << "Failed to parse vocab data: " << e.what() << std::endl;
             }
@@ -220,11 +96,26 @@ bool Quiz::loadQuiz(const std::string& filename) {
         return false;
     }
 
-    distribution = std::uniform_int_distribution<int>(0, static_cast<int>(vocabList.size()) - 1);
+    distribution_ = std::uniform_int_distribution<int>(0, static_cast<int>(vocabList_.size()) - 1);
     return true;
 }
 
 void Quiz::startQuiz() {
+    selectTestType();
+    if (testType_.empty()) {
+        std::cout << "Invalid test type. Quiz aborted." << std::endl;
+        return;
+    }
+    
+    for (int i = 0; i < NUM_QUESTIONS; ++i) {
+        Vocab vocab = getRandomVocab();
+        askQuestion(vocab);
+        std::string userAnswer = getUserAnswer();
+        processAnswer(vocab, userAnswer);
+    }
+}
+
+void Quiz::selectTestType() {
     std::cout << "Select the test type:" << std::endl;
     std::cout << "1. Kanji to Hiragana" << std::endl;
     std::cout << "2. Hiragana to English" << std::endl;
@@ -243,68 +134,41 @@ void Quiz::startQuiz() {
     };
 
     auto it = testTypeMap.find(choice);
-    testType = (it != testTypeMap.end()) ? it->second : "Kanji to Hiragana";
-
-    for (int i = 0; i < NUM_QUESTIONS; ++i) {
-        Vocab vocab = getRandomVocab();
-        askQuestion(vocab);
-        std::string userAnswer;
-        bool isValidAnswer = false;
-
-        while (!isValidAnswer) {
-            std::getline(std::cin, userAnswer);
-
-            // Check if the user wants to quit
-            std::string answerLower = userAnswer;
-            std::transform(answerLower.begin(), answerLower.end(), answerLower.begin(), ::tolower);
-            answerLower.erase(std::remove_if(answerLower.begin(), answerLower.end(), ::isspace), answerLower.end());
-            if (answerLower == "q" || answerLower == "quit") {
-                std::cout << "Quiz terminated by the user." << std::endl;
-                return;  // Exit the function
-            }
-
-            isValidAnswer = validateAnswer(userAnswer);
-
-            if (!isValidAnswer) {
-                std::cout << "Invalid answer. Please try again: ";
-            }
-        }
-        processAnswer(vocab, userAnswer);
-    }
-}
-
-void Quiz::askQuestion(const Vocab& vocab) {
-    std::string question;
-    std::string correctAnswer;
-
-    if (testType == "Kanji to Hiragana") {
-        question = "Translate the following kanji to hiragana: ";
-        correctAnswer = vocab.getHiragana();
-        std::cout << question << vocab.getKanji() << std::endl;
-    }
-    else if (testType == "Hiragana to English") {
-        question = "Translate the following hiragana to English: ";
-        correctAnswer = vocab.getEnglish()[0];
-        std::cout << question << vocab.getHiragana() << std::endl;
-    }
-    else if (testType == "Hiragana to Romaji") {
-        question = "Translate the following romaji to English: ";
-        correctAnswer = vocab.getRomaji()[0];
-        std::cout << question << vocab.getHiragana() << std::endl;
-    }
-    else if (testType == "English to Hiragana") {
-        question = "Translate the following English word to romaji: ";
-        correctAnswer = vocab.getHiragana();
-        std::cout << question << vocab.getEnglish()[0] << std::endl;
-    }
-    else {
-        std::cout << "Invalid test type." << std::endl;
+    if (it == testTypeMap.end()) {
+        std::cout << "Invalid test type. Quiz aborted." << std::endl;
         return;
     }
 
-    
+    testType_ = it->second;
+}
 
-    // Rest of the code...
+std::string Quiz::getUserAnswer() {
+    std::string userAnswer;
+    bool isValidAnswer = false;
+
+    while (!isValidAnswer) {
+        std::getline(std::cin, userAnswer);
+
+        if (userAnswer.empty()) {
+            std::cout << "Invalid answer. Please try again: ";
+            continue;
+        }
+
+        // Check if the user wants to quit
+        std::string answerLower = toLowercaseAndTrim(userAnswer);
+        if (answerLower == "q" || answerLower == "quit") {
+            std::cout << "Quiz terminated by the user." << std::endl;
+            saveQuizState();
+            exit(0);  // Need to change this for when you dont' need to exit.
+        }
+
+        isValidAnswer = validateAnswer(userAnswer);
+
+        if (!isValidAnswer) {
+            std::cout << "Invalid answer. Please try again: ";
+        }
+    }
+    return userAnswer;
 }
 
 void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
@@ -313,21 +177,27 @@ void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
     // Check if the user wants to quit
     if (lowerAndTrimmedAnswer == "q" || lowerAndTrimmedAnswer == "quit") {
         std::cout << "Quiz terminated by the user." << std::endl;
-        exit(0);  // Exit the program
+        exit(0);
+    }
+
+    if (lowerAndTrimmedAnswer == "") {
+        std::cout << "Invalid answer. Please try again." << std::endl;
+        askQuestion(vocab);  // Ask the question again
+        return;
     }
 
     bool isCorrect = false;
 
-    if (testType == "Kanji to Hiragana") {
+    if (testType_ == "Kanji to Hiragana") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
     }
-    else if (testType == "Hiragana to English") {
+    else if (testType_ == "Hiragana to English") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
     }
-    else if (testType == "Hiragana to Romaji") {
-        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
+    else if (testType_ == "Hiragana to Romaji") {
+        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getRomaji());
     }
-    else if (testType == "English to Hiragana") {
+    else if (testType_ == "English to Hiragana") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
     }
     else {
@@ -337,14 +207,126 @@ void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
 
     if (isCorrect) {
         std::cout << "Correct!" << std::endl;
-        correctAnswers++;
+        correctAnswers_++;
     }
     else {
         std::cout << "Incorrect. The correct answer is: " << getCorrectAnswer(vocab) << std::endl;
     }
-    totalQuestions++;
+    totalQuestions_++;
     double success = isCorrect ? 1.0 : 0.0;
-    ebisuModel.updateRecall(success, 1.0, vocab.getDifficulty());
+    ebisuModel_.updateRecall(success, 1.0, vocab.getDifficulty());
+}
+
+void Quiz::askQuestion(const Vocab& vocab) {
+    std::string question;
+    std::string correctAnswer;
+
+    if (testType_ == "Kanji to Hiragana") {
+        question = "Translate the following kanji to hiragana: ";
+        correctAnswer = vocab.getHiragana();
+        std::cout << question << vocab.getKanji() << std::endl;
+    }
+    else if (testType_ == "Hiragana to English") {
+        question = "Translate the following hiragana to English: ";
+        correctAnswer = vocab.getEnglish()[0];
+        std::cout << question << vocab.getHiragana() << std::endl;
+    }
+    else if (testType_ == "Hiragana to Romaji") {
+        question = "Translate the following hiragana to romaji: ";
+        correctAnswer = vocab.getRomaji()[0];
+        std::cout << question << vocab.getHiragana() << std::endl;
+    }
+    else if (testType_ == "English to Hiragana") {
+        question = "Translate the following English word to hiragana: ";
+        correctAnswer = vocab.getHiragana();
+        std::cout << question << vocab.getEnglish()[0] << std::endl;
+    }
+    else {
+        std::cout << "Invalid test type." << std::endl;
+        return;
+    }
+
+    while (true) {
+        std::string userAnswer = getUserAnswer();
+        if (userAnswer.empty()) {
+            continue;  // Ask the question again if the user input is empty
+        }
+        if (userAnswer == "q" || userAnswer == "quit") {
+            std::cout << "Quiz terminated by the user." << std::endl;
+            return;  // Terminate the quiz if the user enters "q" or "quit"
+        }
+        processAnswer(vocab, userAnswer);
+        break;
+    }
+}
+
+Vocab Quiz::getRandomVocab() {
+    if (vocabList_.empty()) {
+        std::cerr << "vocabList is empty!" << std::endl;
+        // Return an empty Vocab object as a fallback
+        return Vocab();
+    }
+    int index = distribution_(generator_);
+    return vocabList_[index];
+}
+
+void Quiz::printStatistics() const {
+    std::cout << "Total questions: " << totalQuestions_ << std::endl;
+    std::cout << "Correct answers: " << correctAnswers_ << std::endl;
+    if (totalQuestions_ > 0) {
+        double percentage = 100.0 * correctAnswers_ / totalQuestions_;
+        std::cout << "Accuracy: " << std::fixed << std::setprecision(2)
+            << percentage << "%" << std::endl;
+    }
+}
+
+void Quiz::saveQuizState() {
+    nlohmann::json quizState;
+    quizState["total_questions"] = totalQuestions_;
+    quizState["correct_answers"] = correctAnswers_;
+    quizState["vocab_list"] = nlohmann::json::array();
+
+    for (const auto& vocab : vocabList_) {
+        quizState["vocab_list"].push_back(vocab.toJson());
+    }
+
+    try {
+        std::ofstream file(QUIZ_STATE_FILE);
+        file << std::setw(4) << quizState << std::endl;
+        std::cout << "Quiz state saved." << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cout << "Unable to open file for saving quiz state: " << e.what() << std::endl;
+    }
+}
+
+void Quiz::loadQuizState() {
+    try {
+        std::ifstream file(QUIZ_STATE_FILE);
+
+        if (!file) {
+            throw std::runtime_error("No quiz state found. Starting a fresh quiz.");
+        }
+
+        nlohmann::json quizData;
+        file >> quizData;
+
+        if (quizData.contains("total_questions") &&
+            quizData.contains("correct_answers") &&
+            quizData.contains("vocab_list")) {
+            totalQuestions_ = quizData["total_questions"];
+            correctAnswers_ = quizData["correct_answers"];
+
+            vocabList_.clear();
+            for (const auto& vocabData : quizData["vocab_list"]) {
+                Vocab vocab(vocabData);
+                vocabList_.push_back(vocab);
+            }
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Failed to load quiz state: " << e.what() << std::endl;
+    }
 }
 
 bool Quiz::checkAnswer(const std::string& userAnswer, const std::string& correctAnswer) {
@@ -360,16 +342,16 @@ bool Quiz::checkAnswer(const std::string& userAnswer, const std::string& correct
 }
 
 std::string Quiz::getCorrectAnswer(const Vocab& vocab) {
-    if (testType == "Kanji to Hiragana") {
+    if (testType_ == "Kanji to Hiragana") {
         return vocab.getHiragana();
     }
-    else if (testType == "Hiragana to English") {
+    else if (testType_ == "Hiragana to English") {
         return vocab.getEnglish()[0];
     }
-    else if (testType == "Hiragana to Romaji") {
+    else if (testType_ == "Hiragana to Romaji") {
         return vocab.getRomaji();
     }
-    else if (testType == "English to Hiragana") {
+    else if (testType_ == "English to Hiragana") {
         return vocab.getHiragana();
     }
     else {
@@ -377,79 +359,13 @@ std::string Quiz::getCorrectAnswer(const Vocab& vocab) {
     }
 }
 
-Vocab Quiz::getRandomVocab() {
-    if (vocabList.empty()) {
-        std::cerr << "vocabList is empty!" << std::endl;
-        // Return an empty Vocab object as a fallback
-        return Vocab();
-    }
-    int index = distribution(generator);
-    return vocabList[index];
-}
-
-void Quiz::printStatistics() const {
-    std::cout << "Total questions: " << totalQuestions << std::endl;
-    std::cout << "Correct answers: " << correctAnswers << std::endl;
-    if (totalQuestions > 0) {
-        double percentage = 100.0 * correctAnswers / totalQuestions;
-        std::cout << "Accuracy: " << std::fixed << std::setprecision(2)
-            << percentage << "%" << std::endl;
-    }
-}
-
-void Quiz::saveQuizState() {
-    json quizState;
-    quizState["total_questions"] = totalQuestions;
-    quizState["correct_answers"] = correctAnswers;
-    quizState["vocab_list"] = json::array();  // Create an empty JSON array
-
-    // Convert the vocabList vector to a JSON array
-    for (const auto& vocab : vocabList) {
-        quizState["vocab_list"].push_back(vocab.toJson());
-    }
-
-    std::ofstream file(QUIZ_STATE_FILE);
-    if (file.is_open()) {
-        file << std::setw(4) << quizState << std::endl;
-        file.close();
-        std::cout << "Quiz state saved." << std::endl;
-    }
-    else {
-        std::cout << "Unable to open file for saving quiz state." << std::endl;
-    }
-}
-
-void Quiz::loadQuizState() {
-    std::ifstream file(QUIZ_STATE_FILE);
-    if (!file.is_open()) {
-        std::cout << "No quiz state found. Starting a fresh quiz." << std::endl;
-        return;
-    }
-
-    json quizData;
-    try {
-        file >> quizData;
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Failed to parse quiz state: " << e.what() << std::endl;
-        return;
-    }
-
-    if (quizData.contains("total_questions") &&
-        quizData.contains("correct_answers") &&
-        quizData.contains("vocab_list")) {
-        totalQuestions = quizData["total_questions"];
-        correctAnswers = quizData["correct_answers"];
-
-        // Clear the current vocabList before loading new items
-        vocabList.clear();
-
-        // Convert the JSON array to a vector of Vocab objects
-        for (const auto& vocabData : quizData["vocab_list"]) {
-            Vocab vocab(vocabData);
-            vocabList.push_back(vocab);
-        }
-    }
+bool Quiz::validateAnswer(const std::string& answer) {
+    std::string trimmedAnswer = trim(answer);
+    std::string lowerAndTrimmedAnswer = toLowercaseAndTrim(trimmedAnswer);
+    return !lowerAndTrimmedAnswer.empty()
+        && utf8::is_valid(lowerAndTrimmedAnswer.begin(), lowerAndTrimmedAnswer.end())
+        && !hasLeadingOrTrailingWhitespace(trimmedAnswer)
+        && lowerAndTrimmedAnswer.find("--") == std::string::npos;
 }
 
 std::string Quiz::trim(const std::string& str, const char& trimChar) {
@@ -467,30 +383,26 @@ std::string Quiz::toLowercaseAndTrim(const std::string& str) {
     return trim(lower);
 }
 
-bool Quiz::containsWhitespace(const std::string& str) {
-    return str.find(' ') != std::string::npos;
-}
-
-// Checks if the string contains leading or trailing whitespace
-bool hasLeadingOrTrailingWhitespace(const std::string& str) {
-    return !str.empty() && (str.front() == ' ' || str.back() == ' ');
-}
-
 bool Quiz::containsInvalidCharacters(const std::string& str) {
     const std::string invalidChars = "!@#$%^&*()_+[],./={}':;";
     std::regex reg("[" + std::regex_replace(invalidChars, std::regex("([\\[\\]-])"), "\\$1") + "]");
     return std::regex_search(str, reg);
 }
 
-// @see: utf8 https://github.com/nemtrif/utfcpp
-bool Quiz::validateAnswer(const std::string& answer) {
-    std::string trimmedAnswer = trim(answer);
-    std::string lowerAndTrimmedAnswer = toLowercaseAndTrim(trimmedAnswer);
-    return !lowerAndTrimmedAnswer.empty()
-        && utf8::is_valid(lowerAndTrimmedAnswer.begin(), lowerAndTrimmedAnswer.end())
-        && !hasLeadingOrTrailingWhitespace(trimmedAnswer)
-        && !containsInvalidCharacters(lowerAndTrimmedAnswer)
-        && lowerAndTrimmedAnswer.find("--") == std::string::npos;
+bool Quiz::containsWhitespace(const std::string& str) {
+    return std::any_of(str.begin(), str.end(), ::isspace);
 }
 
-#endif
+bool Quiz::hasLeadingOrTrailingWhitespace(const std::string& str) {
+    return !str.empty() && (std::isspace(str.front()) || std::isspace(str.back()));
+}
+
+int Quiz::getTotalQuestions() const {
+    return totalQuestions_;
+}
+
+int Quiz::getCorrectAnswers() const {
+    return correctAnswers_;
+}
+
+#endif  // QUIZ_H_

@@ -3,131 +3,22 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "friend",
+      "meaning": "tourism studies",
       "part_of_speech": "noun",
-      "reading": "ともだち",
+      "reading": "かんこうがく",
       "recall_level": 2,
-      "romaji": "tomodachi",
-      "word": "友達"
+      "romaji": "kankougaku",
+      "word": "観光学"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "cooking",
+      "meaning": "student",
       "part_of_speech": "noun",
-      "reading": "りょうり",
-      "recall_level": 0,
-      "romaji": "ryouri",
-      "word": "料理"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "game",
-      "part_of_speech": "noun",
-      "reading": "ゲーム",
+      "reading": "がくせい",
       "recall_level": 2,
-      "romaji": "geemu",
-      "word": "ゲーム"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "history",
-      "part_of_speech": "noun",
-      "reading": "れきし",
-      "recall_level": 2,
-      "romaji": "rekishi",
-      "word": "歴史"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "graduate student",
-      "part_of_speech": "noun",
-      "reading": "だいがくいんせい",
-      "recall_level": 1,
-      "romaji": "daigakuinsei",
-      "word": "大学院生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "first-year student",
-      "part_of_speech": "noun",
-      "reading": "いちねんせい",
-      "recall_level": 1,
-      "romaji": "ichinensei",
-      "word": "一年生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "college student",
-      "part_of_speech": "noun",
-      "reading": "だいがくせい",
-      "recall_level": 2,
-      "romaji": "daigakusei",
-      "word": "大学生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "second-year student",
-      "part_of_speech": "noun",
-      "reading": "にねんせい",
-      "recall_level": 1,
-      "romaji": "ninensei",
-      "word": "二年生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "fourth-year student",
-      "part_of_speech": "noun",
-      "reading": "よねんせい",
-      "recall_level": 2,
-      "romaji": "yonensei",
-      "word": "四年生"
-    },
-    {
-      "lesson": "1",
-      "meaning": "name",
-      "part_of_speech": "noun",
-      "reading": "なまえ",
-      "recall_level": 2,
-      "romaji": "namae",
-      "word": "名前"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "I, me",
-      "part_of_speech": "noun",
-      "reading": "わたし",
-      "recall_level": 2,
-      "romaji": "watashi",
-      "word": "私"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "Japanese person",
-      "part_of_speech": "noun",
-      "reading": "にほんじん",
-      "recall_level": 2,
-      "romaji": "nihonjin",
-      "word": "日本人"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "internet",
-      "part_of_speech": "noun",
-      "reading": "インターネット／ネット",
-      "recall_level": 2,
-      "romaji": "intaanetto/netto",
-      "word": "インターネット／ネット"
+      "romaji": "gakusei",
+      "word": "学生"
     },
     {
       "dialogue": "1-2",
@@ -142,52 +33,82 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "anime",
+      "meaning": "friend",
       "part_of_speech": "noun",
-      "reading": "アニメ",
+      "reading": "ともだち",
       "recall_level": 2,
-      "romaji": "anime",
-      "word": "アニメ"
+      "romaji": "tomodachi",
+      "word": "友達"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "movie",
+      "meaning": "music",
       "part_of_speech": "noun",
-      "reading": "えいが",
-      "recall_level": 2,
-      "romaji": "eiga",
-      "word": "映画"
+      "reading": "おんがく",
+      "recall_level": 1,
+      "romaji": "ongaku",
+      "word": "音楽"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "teacher",
+      "meaning": "university",
       "part_of_speech": "noun",
-      "reading": "せんせい",
-      "recall_level": 2,
-      "romaji": "sensei",
-      "word": "先生"
+      "reading": "だいがく",
+      "recall_level": 1,
+      "romaji": "daigaku",
+      "word": "大学"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "major",
+      "meaning": "sports",
       "part_of_speech": "noun",
-      "reading": "せんこう",
+      "reading": "スポーツ",
       "recall_level": 2,
-      "romaji": "senkou",
-      "word": "専攻"
+      "romaji": "supootsu",
+      "word": "スポーツ"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "Japan",
+      "meaning": "history",
       "part_of_speech": "noun",
-      "reading": "にほん",
+      "reading": "れきし",
       "recall_level": 2,
-      "romaji": "nihon",
-      "word": "日本"
+      "romaji": "rekishi",
+      "word": "歴史"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "college student",
+      "part_of_speech": "noun",
+      "reading": "だいがくせい",
+      "recall_level": 2,
+      "romaji": "daigakusei",
+      "word": "大学生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "travel",
+      "part_of_speech": "noun",
+      "reading": "りょこう",
+      "recall_level": 2,
+      "romaji": "ryokou",
+      "word": "旅行"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "dog",
+      "part_of_speech": "noun",
+      "reading": "いぬ",
+      "recall_level": 3,
+      "romaji": "inu",
+      "word": "犬"
     },
     {
       "dialogue": "1-2",
@@ -212,162 +133,22 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "University of Hawaii",
+      "meaning": "hobby",
       "part_of_speech": "noun",
-      "reading": "ハワイだいがく",
+      "reading": "しゅみ",
       "recall_level": 2,
-      "romaji": "Hawai Daigaku",
-      "word": "ハワイ大学"
+      "romaji": "shumi",
+      "word": "趣味"
     },
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "surfing",
+      "meaning": "Japan",
       "part_of_speech": "noun",
-      "reading": "サーフィン",
-      "recall_level": 3,
-      "romaji": "saafin",
-      "word": "サーフィン"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "computer",
-      "part_of_speech": "noun",
-      "reading": "コンピューター",
+      "reading": "にほん",
       "recall_level": 2,
-      "romaji": "konpyuutaa",
-      "word": "コンピューター"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "Japanese language",
-      "part_of_speech": "noun",
-      "reading": "にほんご",
-      "recall_level": 2,
-      "romaji": "nihongo",
-      "word": "日本語"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "tourism studies",
-      "part_of_speech": "noun",
-      "reading": "かんこうがく",
-      "recall_level": 2,
-      "romaji": "kankougaku",
-      "word": "観光学"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "dog",
-      "part_of_speech": "noun",
-      "reading": "いぬ",
-      "recall_level": 3,
-      "romaji": "inu",
-      "word": "犬"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "place",
-      "part_of_speech": "noun",
-      "reading": "ところ",
-      "recall_level": 1,
-      "romaji": "tokoro",
-      "word": "所"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "travel",
-      "part_of_speech": "noun",
-      "reading": "りょこう",
-      "recall_level": 2,
-      "romaji": "ryokou",
-      "word": "旅行"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "sports",
-      "part_of_speech": "noun",
-      "reading": "スポーツ",
-      "recall_level": 2,
-      "romaji": "supootsu",
-      "word": "スポーツ"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "university",
-      "part_of_speech": "noun",
-      "reading": "だいがく",
-      "recall_level": 1,
-      "romaji": "daigaku",
-      "word": "大学"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "music",
-      "part_of_speech": "noun",
-      "reading": "おんがく",
-      "recall_level": 1,
-      "romaji": "ongaku",
-      "word": "音楽"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "this person (polite)",
-      "part_of_speech": "noun",
-      "reading": "こちら",
-      "recall_level": 0,
-      "romaji": "kochira",
-      "word": "こちら"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "country",
-      "part_of_speech": "noun",
-      "reading": "くに",
-      "recall_level": 2,
-      "romaji": "kuni",
-      "word": "国"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "student",
-      "part_of_speech": "noun",
-      "reading": "がくせい",
-      "recall_level": 2,
-      "romaji": "gakusei",
-      "word": "学生"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "same",
-      "part_of_speech": "noun",
-      "reading": "おなじ",
-      "recall_level": 1,
-      "romaji": "onaji",
-      "word": "同じ"
-    },
-    {
-      "dialogue": "1-2",
-      "lesson": "1",
-      "meaning": "reading",
-      "part_of_speech": "noun",
-      "reading": "どくしょ",
-      "recall_level": 1,
-      "romaji": "dokusho",
-      "word": "読書"
+      "romaji": "nihon",
+      "word": "日本"
     },
     {
       "dialogue": "1-2",
@@ -382,12 +163,111 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "sea",
+      "meaning": "this person (polite)",
       "part_of_speech": "noun",
-      "reading": "うみ",
+      "reading": "こちら",
+      "recall_level": 0,
+      "romaji": "kochira",
+      "word": "こちら"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "reading",
+      "part_of_speech": "noun",
+      "reading": "どくしょ",
+      "recall_level": 1,
+      "romaji": "dokusho",
+      "word": "読書"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "fourth-year student",
+      "part_of_speech": "noun",
+      "reading": "よねんせい",
       "recall_level": 2,
-      "romaji": "umi",
-      "word": "海"
+      "romaji": "yonensei",
+      "word": "四年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "Japanese person",
+      "part_of_speech": "noun",
+      "reading": "にほんじん",
+      "recall_level": 2,
+      "romaji": "nihonjin",
+      "word": "日本人"
+    },
+    {
+      "lesson": "1",
+      "meaning": "name",
+      "part_of_speech": "noun",
+      "reading": "なまえ",
+      "recall_level": 2,
+      "romaji": "namae",
+      "word": "名前"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "game",
+      "part_of_speech": "noun",
+      "reading": "ゲーム",
+      "recall_level": 2,
+      "romaji": "geemu",
+      "word": "ゲーム"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "internet",
+      "part_of_speech": "noun",
+      "reading": "インターネット／ネット",
+      "recall_level": 2,
+      "romaji": "intaanetto/netto",
+      "word": "インターネット／ネット"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "nearby",
+      "part_of_speech": "noun",
+      "reading": "ちかく",
+      "recall_level": 2,
+      "romaji": "chikaku",
+      "word": "近く"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "Japanese language",
+      "part_of_speech": "noun",
+      "reading": "にほんご",
+      "recall_level": 2,
+      "romaji": "nihongo",
+      "word": "日本語"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "teacher",
+      "part_of_speech": "noun",
+      "reading": "せんせい",
+      "recall_level": 2,
+      "romaji": "sensei",
+      "word": "先生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "surfing",
+      "part_of_speech": "noun",
+      "reading": "サーフィン",
+      "recall_level": 3,
+      "romaji": "saafin",
+      "word": "サーフィン"
     },
     {
       "dialogue": "1-2",
@@ -402,12 +282,42 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "hobby",
+      "meaning": "country",
       "part_of_speech": "noun",
-      "reading": "しゅみ",
+      "reading": "くに",
       "recall_level": 2,
-      "romaji": "shumi",
-      "word": "趣味"
+      "romaji": "kuni",
+      "word": "国"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "place",
+      "part_of_speech": "noun",
+      "reading": "ところ",
+      "recall_level": 1,
+      "romaji": "tokoro",
+      "word": "所"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "I, me",
+      "part_of_speech": "noun",
+      "reading": "わたし",
+      "recall_level": 2,
+      "romaji": "watashi",
+      "word": "私"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "sea",
+      "part_of_speech": "noun",
+      "reading": "うみ",
+      "recall_level": 2,
+      "romaji": "umi",
+      "word": "海"
     },
     {
       "dialogue": "1-2",
@@ -422,12 +332,102 @@
     {
       "dialogue": "1-2",
       "lesson": "1",
-      "meaning": "nearby",
+      "meaning": "cooking",
       "part_of_speech": "noun",
-      "reading": "ちかく",
+      "reading": "りょうり",
+      "recall_level": 0,
+      "romaji": "ryouri",
+      "word": "料理"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "graduate student",
+      "part_of_speech": "noun",
+      "reading": "だいがくいんせい",
+      "recall_level": 1,
+      "romaji": "daigakuinsei",
+      "word": "大学院生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "second-year student",
+      "part_of_speech": "noun",
+      "reading": "にねんせい",
+      "recall_level": 1,
+      "romaji": "ninensei",
+      "word": "二年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "anime",
+      "part_of_speech": "noun",
+      "reading": "アニメ",
       "recall_level": 2,
-      "romaji": "chikaku",
-      "word": "近く"
+      "romaji": "anime",
+      "word": "アニメ"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "movie",
+      "part_of_speech": "noun",
+      "reading": "えいが",
+      "recall_level": 2,
+      "romaji": "eiga",
+      "word": "映画"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "computer",
+      "part_of_speech": "noun",
+      "reading": "コンピューター",
+      "recall_level": 2,
+      "romaji": "konpyuutaa",
+      "word": "コンピューター"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "University of Hawaii",
+      "part_of_speech": "noun",
+      "reading": "ハワイだいがく",
+      "recall_level": 2,
+      "romaji": "Hawai Daigaku",
+      "word": "ハワイ大学"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "first-year student",
+      "part_of_speech": "noun",
+      "reading": "いちねんせい",
+      "recall_level": 1,
+      "romaji": "ichinensei",
+      "word": "一年生"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "same",
+      "part_of_speech": "noun",
+      "reading": "おなじ",
+      "recall_level": 1,
+      "romaji": "onaji",
+      "word": "同じ"
+    },
+    {
+      "dialogue": "1-2",
+      "lesson": "1",
+      "meaning": "major",
+      "part_of_speech": "noun",
+      "reading": "せんこう",
+      "recall_level": 2,
+      "romaji": "senkou",
+      "word": "専攻"
     }
   ]
 }

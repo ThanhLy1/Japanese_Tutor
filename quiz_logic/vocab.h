@@ -1,5 +1,5 @@
-#ifndef VOCAB_H
-#define VOCAB_H
+#ifndef VOCAB_H_
+#define VOCAB_H_
 
 #include <string>
 #include <vector>
@@ -8,16 +8,24 @@
 #include <iomanip>
 #include <nlohmann/json.hpp>
 
-using json = nlohmann::json;
-
 class Vocab {
+    private:
+    std::string kanji_;
+    std::string hiragana_;
+    std::string romaji_;
+    std::vector<std::string> english_;
+    std::string partOfSpeech_;
+    std::string dialogue_;
+    std::string lesson_;
+    double difficulty_ = 0.0; // default initializer
+
 public:
-    Vocab();
-    explicit Vocab(const json& jsonData);
+    Vocab() = default;
+    explicit Vocab(const nlohmann::json& jsonData);
 
     void loadFromJsonFile(const std::string& filename);
     void saveToPersistenceFile(const std::string& filename) const;
-    json toJson() const;
+    nlohmann::json toJson() const;
 
     std::string getKanji() const;
     std::string getHiragana() const;
@@ -39,29 +47,19 @@ public:
 
     void printDetails() const;
     std::string correctAnswer() const;
-
-public: // change this back to private
-    std::string kanji;
-    std::string hiragana;
-    std::string romaji;
-    std::vector<std::string> english;
-    std::string partOfSpeech;
-    std::string dialogue;
-    std::string lesson;
-    double difficulty;
 };
 
-Vocab::Vocab() = default;
+//Vocab::Vocab() = default;
 
-Vocab::Vocab(const json& jsonData)
-    : kanji(jsonData["kanji"]),
-      hiragana(jsonData["hiragana"]),
-      romaji(jsonData["romaji"]),
-      english(jsonData["english"].get<std::vector<std::string>>()),
-      partOfSpeech(jsonData["part_of_speech"]),
-      dialogue(jsonData["dialogue"]),
-      lesson(jsonData["lesson"]),
-      difficulty(jsonData["difficulty"]) {}
+Vocab::Vocab(const nlohmann::json& jsonData)
+    : kanji_(jsonData["kanji"]),
+      hiragana_(jsonData["hiragana"]),
+      romaji_(jsonData["romaji"]),
+      english_(jsonData["english"].get<std::vector<std::string>>()),
+      partOfSpeech_(jsonData["part_of_speech"]),
+      dialogue_(jsonData["dialogue"]),
+      lesson_(jsonData["lesson"]),
+      difficulty_(jsonData["difficulty"]) {}
 
 void Vocab::loadFromJsonFile(const std::string& filename) {
     std::ifstream file(filename);
@@ -70,7 +68,7 @@ void Vocab::loadFromJsonFile(const std::string& filename) {
         return;
     }
 
-    json jsonData;
+    nlohmann::json jsonData;
     try {
         file >> jsonData;
     } catch (const std::exception& e) {
@@ -93,17 +91,17 @@ void Vocab::saveToPersistenceFile(const std::string& filename) const {
         return;
     }
 
-    json jsonData = {
-        {"kanji", kanji},
-        {"hiragana", hiragana},
-        {"romaji", romaji},
-        {"english", english},
-        {"part_of_speech", partOfSpeech},
-        {"dialogue", dialogue},
-        {"lesson", lesson},
-        {"difficulty", difficulty}};
+    nlohmann::json jsonData = {
+        {"kanji", kanji_},
+        {"hiragana", hiragana_},
+        {"romaji", romaji_},
+        {"english", english_},
+        {"part_of_speech", partOfSpeech_},
+        {"dialogue", dialogue_},
+        {"lesson", lesson_},
+        {"difficulty", difficulty_}};
 
-    json arrayData = json::array();
+    nlohmann::json arrayData = nlohmann::json::array();
     arrayData.push_back(jsonData);
 
     try {
@@ -115,87 +113,83 @@ void Vocab::saveToPersistenceFile(const std::string& filename) const {
     }
 }
 
-json Vocab::toJson() const {
-    json vocabJson;
-    vocabJson["kanji"] = kanji;
-    vocabJson["hiragana"] = hiragana;
-    vocabJson["romaji"] = romaji;
-    vocabJson["english"] = english;
-    vocabJson["part_of_speech"] = partOfSpeech;
-    vocabJson["dialogue"] = dialogue;
-    vocabJson["lesson"] = lesson;
-    vocabJson["difficulty"] = difficulty;
+nlohmann::json Vocab::toJson() const {
+    nlohmann::json vocabJson;
+    vocabJson["kanji"] = kanji_;
+    vocabJson["hiragana"] = hiragana_;
+    vocabJson["romaji"] = romaji_;
+    vocabJson["english"] = english_;
+    vocabJson["part_of_speech"] = partOfSpeech_;
+    vocabJson["dialogue"] = dialogue_;
+    vocabJson["lesson"] = lesson_;
+    vocabJson["difficulty"] = difficulty_;
     return vocabJson;
 }
 
-std::string Vocab::getKanji() const { return kanji; }
+std::string Vocab::getKanji() const { return kanji_; }
 
-std::string Vocab::getHiragana() const { return hiragana; }
+std::string Vocab::getHiragana() const { return hiragana_; }
 
-std::string Vocab::getRomaji() const { return romaji; }
+std::string Vocab::getRomaji() const { return romaji_; }
 
-std::vector<std::string> Vocab::getEnglish() const { return english; }
+std::vector<std::string> Vocab::getEnglish() const { return english_; }
 
-std::string Vocab::getPartOfSpeech() const { return partOfSpeech; }
+std::string Vocab::getPartOfSpeech() const { return partOfSpeech_; }
 
-std::string Vocab::getDialogue() const { return dialogue; }
+std::string Vocab::getDialogue() const { return dialogue_; }
 
-std::string Vocab::getLesson() const { return lesson; }
+std::string Vocab::getLesson() const { return lesson_; }
 
-double Vocab::getDifficulty() const { return difficulty; }
+double Vocab::getDifficulty() const { return difficulty_; }
 
-void Vocab::setKanji(const std::string& newKanji) { kanji = newKanji; }
+void Vocab::setKanji(const std::string& newKanji) { kanji_ = newKanji; }
 
 void Vocab::setHiragana(const std::string& newHiragana) {
-    hiragana = newHiragana;
+    hiragana_ = newHiragana;
 }
 
-void Vocab::setRomaji(const std::string& newRomaji) { romaji = newRomaji; }
+void Vocab::setRomaji(const std::string& newRomaji) { romaji_ = newRomaji; }
 
 void Vocab::setEnglish(const std::vector<std::string>& newEnglish) {
-    english = newEnglish;
+    english_ = newEnglish;
 }
 
 void Vocab::setPartOfSpeech(const std::string& newPartOfSpeech) {
-    partOfSpeech = newPartOfSpeech;
+    partOfSpeech_ = newPartOfSpeech;
 }
 
 void Vocab::setDialogue(const std::string& newDialogue) {
-    dialogue = newDialogue;
+    dialogue_ = newDialogue;
 }
 
-void Vocab::setLesson(const std::string& newLesson) { lesson = newLesson; }
+void Vocab::setLesson(const std::string& newLesson) { lesson_ = newLesson; }
 
-void Vocab::setDifficulty(double newDifficulty) { difficulty = newDifficulty; }
+void Vocab::setDifficulty(double newDifficulty) { difficulty_ = newDifficulty; }
 
 void Vocab::printDetails() const {
-    std::cout << "Kanji: " << kanji << std::endl;
-    std::cout << "Hiragana: " << hiragana << std::endl;
-    std::cout << "Romaji: " << romaji << std::endl;
+    std::cout << "Kanji: " << kanji_ << std::endl;
+    std::cout << "Hiragana: " << hiragana_ << std::endl;
+    std::cout << "Romaji: " << romaji_ << std::endl;
 
     std::cout << "English(s): ";
-    for (const auto& m : english) {
+    for (const auto& m : english_) {
         std::cout << m << ", ";
     }
     std::cout << std::endl;
 
-    std::cout << "Part of Speech: " << partOfSpeech << std::endl;
-    std::cout << "Dialogue: " << dialogue << std::endl;
-    std::cout << "Lesson: " << lesson << std::endl;
-    std::cout << "Difficulty: " << difficulty << std::endl;
+    std::cout << "Part of Speech: " << partOfSpeech_ << std::endl;
+    std::cout << "Dialogue: " << dialogue_ << std::endl;
+    std::cout << "Lesson: " << lesson_ << std::endl;
+    std::cout << "Difficulty: " << difficulty_ << std::endl;
 }
 
 std::string Vocab::correctAnswer() const {
-    std::string answer = "";
-    for (const auto& m : english) {
-        answer += m + ", ";
+    std::stringstream ss;
+    for (size_t i = 0; i < english_.size(); ++i) {
+        if (i > 0) ss << ", ";
+        ss << english_[i];
     }
-    // remove the last comma and space
-    if (!answer.empty()) {
-        answer.pop_back();
-        answer.pop_back();
-    }
-    return answer;
+    return ss.str();
 }
 
-#endif
+#endif  // VOCAB_H_

@@ -8,7 +8,7 @@ int main() {
     AudioPlayer audioPlayer;
 
     // Load the audio file
-    if (!audioPlayer.loadAudio("wav/hello.wav")) {
+    if (!audioPlayer.loadAudio("../test_audio.wav")) {
         std::cerr << "Failed to load audio." << std::endl;
         return 1;
     }

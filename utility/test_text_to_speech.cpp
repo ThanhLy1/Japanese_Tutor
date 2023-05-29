@@ -1,6 +1,8 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "tts.h"
-
+#include "AudioPlayer.h"
 
 
 int main(int argc, char* argv[]) {
@@ -16,7 +18,7 @@ int main(int argc, char* argv[]) {
 
     std::map<std::string, std::string> params;
     params["text"] = voice.urlEncode(text);
-    params["speaker"] = "13";
+    params["speaker"] = "17";
     params["speedScale"] = "1.7";
     params["volumeScale"] = "1.0";
     params["intonationScale"] = "1.5";
@@ -37,5 +39,22 @@ int main(int argc, char* argv[]) {
 
     std::cout << "Audio file saved: " << audioFilePath << std::endl;
 
+    // Create an instance of AudioPlayer
+    AudioPlayer audioPlayer;
+
+    // Load the audio file
+    if (!audioPlayer.loadAudio("test_audio.wav")) {
+        std::cerr << "Failed to load audio." << std::endl;
+        return 1;
+    }
+
+    // Play the audio
+    audioPlayer.play();
+
+    // Delay for a few seconds (adjust the duration as needed)
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+
+    // Stop the audio
+    audioPlayer.stop();
     return 0;
 }

@@ -2,7 +2,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -Wall -Wextra -I./include
+CXXFLAGS = -std=c++14 -g -Wall -Wextra -I./include
 
 # Libraries
 LIBS = -lSDL2 -lSDL2_mixer -lstdc++ -lcurl
@@ -42,7 +42,7 @@ test: $(VOCAB_EXECUTABLE)
 	./$(VOCAB_EXECUTABLE) japanese_101.json
 
 utility-test: $(UTILITY_EXECUTABLE)
-	./$(UTILITY_EXECUTABLE) "こにちはAIです"
+	./$(UTILITY_EXECUTABLE) "こにちはブランドンセクシーボーイ"
 
 # Usage: make u-test-args ARGS="my text here"
 u-test-args:

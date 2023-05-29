@@ -39,3 +39,52 @@ TODO:
 
     Progress Reports: 
         Generate progress reports or summaries periodically to provide users with an overview of their achievements, areas of improvement, and recommendations for further study.
+
+
+    /*
+    // Function declarations for quiz modes
+    void askMultipleChoiceQuestion(const Vocab& vocab);
+    void processMultipleChoiceAnswer(const Vocab& vocab, const std::string& userAnswer);
+    void askFillInTheBlankQuestion(const Vocab& vocab);
+    void processFillInTheBlankAnswer(const Vocab& vocab, const std::string& userAnswer);
+    void askListeningComprehensionQuestion(const Vocab& vocab);
+    void processListeningComprehensionAnswer(const Vocab& vocab, const std::string& userAnswer);
+    */
+
+/*
+void Quiz::askMultipleChoiceQuestion(const Vocab& vocab) {
+    // code for asking a multiple choice question
+    std::cout << "Translate the following word to English: "
+              << vocab.getKanji() << std::endl;
+    std::cout << "1. Option 1" << std::endl;
+    std::cout << "2. Option 2" << std::endl;
+    std::cout << "3. Option 3" << std::endl;
+    std::cout << "4. Option 4" << std::endl;
+}
+
+void Quiz::processMultipleChoiceAnswer(const Vocab& vocab, const std::string& userAnswer) {
+    // code for processing a multiple choice answer
+    // For simplicity, let's assume that user's answer is the number of correct option
+}
+
+void Quiz::askFillInTheBlankQuestion(const Vocab& vocab) {
+    // code for asking a fill-in-the-blank question
+    std::cout << "Fill in the blank with the correct translation: ";
+}
+
+void Quiz::processFillInTheBlankAnswer(const Vocab& vocab, const std::string& userAnswer) {
+    // code for processing a fill-in-the-blank answer
+}
+
+void Quiz::askListeningComprehensionQuestion(const Vocab& vocab) {
+    // code for asking a listening comprehension question
+    std::cout << "Listen to the following audio clip and write the English translation: "
+              << std::endl;
+    // Play audio clip here
+}
+
+void Quiz::processListeningComprehensionAnswer(const Vocab& vocab, const std::string& userAnswer) {
+    // code for processing a listening comprehension answer
+
+}
+*/

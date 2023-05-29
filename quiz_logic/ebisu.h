@@ -1,5 +1,5 @@
-#ifndef EBISU_H
-#define EBISU_H
+#ifndef EBISU_H_
+#define EBISU_H_
 
 #include <cmath>
 #include <boost/math/special_functions/beta.hpp>
@@ -21,73 +21,73 @@ public:
     void setT(double newT);
 
 private:
-    double alpha;
-    double beta;
-    double t;
+    double alpha_;
+    double beta_;
+    double t_;
 };
 
 Ebisu::Ebisu(double alpha, double beta, double t)
-    : alpha(alpha), beta(beta), t(t) {}
+    : alpha_(alpha), beta_(beta), t_(t) {}
 
 double Ebisu::predictRecall(double elapsed, bool exact) const {
-    double recallProbability = 0.0;
+    double recall_probability = 0.0;
     if (exact) {
-        recallProbability =
-            std::exp(std::log(alpha) - std::log(alpha + beta) +
-                     (alpha + beta) * std::log((t + elapsed) / t));
+        recall_probability =
+            std::exp(std::log(alpha_) - std::log(alpha_ + beta_) +
+                     (alpha_ + beta_) * std::log((t_ + elapsed) / t_));
     } else {
-        recallProbability =
-            1.0 / (1.0 + std::pow((t + elapsed) / t, alpha + beta));
+        recall_probability =
+            1.0 / (1.0 + std::pow((t_ + elapsed) / t_, alpha_ + beta_));
     }
-    return recallProbability;
+    return recall_probability;
 }
 
 void Ebisu::updateRecall(double success, double total, double elapsed) {
-    double alphaPosterior = alpha + success;
-    double betaPosterior = beta + total - success;
-    double tPosterior =
-        (alphaPosterior / (alphaPosterior + betaPosterior)) *
-        ((t + elapsed) / alphaPosterior);
+    double alpha_posterior = alpha_ + success;
+    double beta_posterior = beta_ + total - success;
+    double t_posterior =
+        (alpha_posterior / (alpha_posterior + beta_posterior)) *
+        ((t_ + elapsed) / alpha_posterior);
 
-    alpha = alphaPosterior;
-    beta = betaPosterior;
-    t = tPosterior;
+    alpha_ = alpha_posterior;
+    beta_ = beta_posterior;
+    t_ = t_posterior;
 }
 
 double Ebisu::modelToPercentileDecay() const {
-    double percentileDecay =
-        std::pow(t, 1.0 / (alpha + beta)) /
-        boost::math::beta(alpha, beta);
-    return percentileDecay;
+    double percentile_decay =
+        std::pow(t_, 1.0 / (alpha_ + beta_)) /
+        boost::math::beta(alpha_, beta_);
+    return percentile_decay;
 }
 
-double Ebisu::percentileDecayToModel(double percentileDecay) {
-    double alphaPosterior =
-        (alpha + beta) *
-        (std::pow(percentileDecay * boost::math::beta(alpha, beta),
-                  alpha + beta) -
+double Ebisu::percentileDecayToModel(double percentile_decay) {
+    double alpha_posterior =
+        (alpha_ + beta_) *
+        (std::pow(percentile_decay * boost::math::beta(alpha_, beta_),
+                  alpha_ + beta_) -
          1);
-    double betaPosterior = alpha * ((t / percentileDecay) - 1);
-    double tPosterior =
-        percentileDecay * (alphaPosterior / (alphaPosterior + betaPosterior));
+    double beta_posterior = alpha_ * ((t_ / percentile_decay) - 1);
+    double t_posterior =
+        percentile_decay * (alpha_posterior / (alpha_posterior + beta_posterior));
 
-    alpha = alphaPosterior;
-    beta = betaPosterior;
-    t = tPosterior;
+    alpha_ = alpha_posterior;
+    beta_ = beta_posterior;
+    t_ = t_posterior;
 
-    return tPosterior;
+    return t_posterior;
 }
 
-double Ebisu::getAlpha() const { return alpha; }
+double Ebisu::getAlpha() const { return alpha_; }
 
-double Ebisu::getBeta() const { return beta; }
+double Ebisu::getBeta() const { return beta_; }
 
-double Ebisu::getT() const { return t; }
+double Ebisu::getT() const { return t_; }
 
-void Ebisu::setAlpha(double newAlpha) { alpha = newAlpha; }
+void Ebisu::setAlpha(double newAlpha) { alpha_ = newAlpha; }
 
-void Ebisu::setBeta(double newBeta) { beta = newBeta; }
+void Ebisu::setBeta(double newBeta) { beta_ = newBeta; }
 
-void Ebisu::setT(double newT) { t = newT; }
+void Ebisu::setT(double newT) { t_ = newT; }
 
-#endif
+#endif  // EBISU_H_

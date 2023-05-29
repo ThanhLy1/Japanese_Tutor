@@ -11,7 +11,6 @@
 ###############################################################################
 
 
-
 # Usage: on the left side is the japanese word for translation it is delimit
 #        with : the right side will be the name of the audio file.
 # Test case where there's no name on the right
