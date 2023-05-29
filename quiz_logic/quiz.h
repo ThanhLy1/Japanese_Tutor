@@ -24,7 +24,7 @@ private:
     std::mt19937 generator_;
     std::uniform_int_distribution<int> distribution_;
     Ebisu ebisuModel_;
-    std::string testType_;
+    std::string quizType_;
     size_t totalQuestions_ = 0;
     int correctAnswers_ = 0;
     const int NUM_QUESTIONS = 10;
@@ -38,7 +38,7 @@ public:
           generator_(rd_()),
           distribution_(),
           ebisuModel_(),
-          testType_(),
+          quizType_(),
           totalQuestions_(0),
           correctAnswers_(0),
           NUM_QUESTIONS(10)
@@ -65,12 +65,12 @@ public:
     void saveQuizState();
     void loadQuizState();
 
-    // Needed for unit test otherwise it's protected class
-    //std::string testType_;
+    // Needed for unit quiz otherwise it's protected class
+    //std::string quizType_;
     bool checkAnswer(const std::string& userAnswer, const std::string& correctAnswer);
     std::string trim(const std::string& str, const char& trimChar = ' ');
     std::string toLowercaseAndTrim(const std::string& str);
-    void selectTestType();
+    void selectQuizType();
     std::string getCorrectAnswer(const Vocab& vocab);
     std::string getUserAnswer();
     bool containsInvalidCharacters(const std::string& str);
@@ -121,9 +121,9 @@ bool Quiz::loadQuiz(const std::string& filename) {
 }
 
 void Quiz::startQuiz() {
-    selectTestType();
-    if (testType_.empty()) {
-        std::cout << "Invalid test type. Quiz aborted." << std::endl;
+    selectQuizType();
+    if (quizType_.empty()) {
+        std::cout << "Invalid quiz type. Quiz aborted." << std::endl;
         return;
     }
 
@@ -133,30 +133,30 @@ void Quiz::startQuiz() {
     }
 }
 
-void Quiz::selectTestType() {
-    std::map<int, std::string> testTypeMap = {
+void Quiz::selectQuizType() {
+    std::map<int, std::string> quizTypeMap = {
         {1, "Kanji to Hiragana"},
         {2, "Hiragana to English"},
         {3, "Hiragana to Romaji"},
         {4, "English to Hiragana"}
     };
 
-    std::cout << "Select the test type:" << std::endl;
-    for (const auto& testType : testTypeMap) {
-        std::cout << testType.first << ". " << testType.second << std::endl;
+    std::cout << "Select the quiz type:" << std::endl;
+    for (const auto& quizType : quizTypeMap) {
+        std::cout << quizType.first << ". " << quizType.second << std::endl;
     }
 
     int choice;
     std::cin >> choice;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
 
-    auto it = testTypeMap.find(choice);
-    if (it == testTypeMap.end()) {
-        std::cout << "Invalid test type. Quiz aborted." << std::endl;
+    auto it = quizTypeMap.find(choice);
+    if (it == quizTypeMap.end()) {
+        std::cout << "Invalid quiz type. Quiz aborted." << std::endl;
         return;
     }
 
-    testType_ = it->second;
+    quizType_ = it->second;
 }
 
 std::string Quiz::getUserAnswer() {
@@ -198,20 +198,20 @@ void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
 
     bool isCorrect = false;
 
-    if (testType_ == "Kanji to Hiragana") {
+    if (quizType_ == "Kanji to Hiragana") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
     }
-    else if (testType_ == "Hiragana to English") {
+    else if (quizType_ == "Hiragana to English") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
     }
-    else if (testType_ == "Hiragana to Romaji") {
+    else if (quizType_ == "Hiragana to Romaji") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getRomaji());
     }
-    else if (testType_ == "English to Hiragana") {
+    else if (quizType_ == "English to Hiragana") {
         isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
     }
     else {
-        std::cout << "Invalid test type." << std::endl;
+        std::cout << "Invalid quiz type." << std::endl;
         return;
     }
 
@@ -231,28 +231,28 @@ void Quiz::askQuestion(const Vocab& vocab) {
     std::string question;
     std::string correctAnswer;
 
-    if (testType_ == "Kanji to Hiragana") {
+    if (quizType_ == "Kanji to Hiragana") {
         question = "Translate the following kanji to hiragana: ";
         correctAnswer = vocab.getHiragana();
         std::cout << question << vocab.getKanji() << std::endl;
     }
-    else if (testType_ == "Hiragana to English") {
+    else if (quizType_ == "Hiragana to English") {
         question = "Translate the following hiragana to English: ";
         correctAnswer = vocab.getEnglish()[0];
         std::cout << question << vocab.getHiragana() << std::endl;
     }
-    else if (testType_ == "Hiragana to Romaji") {
+    else if (quizType_ == "Hiragana to Romaji") {
         question = "Translate the following hiragana to romaji: ";
         correctAnswer = vocab.getRomaji()[0];
         std::cout << question << vocab.getHiragana() << std::endl;
     }
-    else if (testType_ == "English to Hiragana") {
+    else if (quizType_ == "English to Hiragana") {
         question = "Translate the following English word to hiragana: ";
         correctAnswer = vocab.getHiragana();
         std::cout << question << vocab.getEnglish()[0] << std::endl;
     }
     else {
-        std::cout << "Invalid test type." << std::endl;
+        std::cout << "Invalid quiz type." << std::endl;
         return;
     }
 
@@ -352,20 +352,20 @@ bool Quiz::checkAnswer(const std::string& userAnswer, const std::string& correct
 }
 
 std::string Quiz::getCorrectAnswer(const Vocab& vocab) {
-    if (testType_ == "Kanji to Hiragana") {
+    if (quizType_ == "Kanji to Hiragana") {
         return vocab.getHiragana();
     }
-    else if (testType_ == "Hiragana to English") {
+    else if (quizType_ == "Hiragana to English") {
         return vocab.getEnglish()[0];
     }
-    else if (testType_ == "Hiragana to Romaji") {
+    else if (quizType_ == "Hiragana to Romaji") {
         return vocab.getRomaji();
     }
-    else if (testType_ == "English to Hiragana") {
+    else if (quizType_ == "English to Hiragana") {
         return vocab.getHiragana();
     }
     else {
-        return "Invalid test type.";
+        return "Invalid quiz type.";
     }
 }
 
