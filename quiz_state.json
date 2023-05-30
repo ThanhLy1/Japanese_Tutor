@@ -1,6 +1,11 @@
 {
-    "correct_answers": 2,
-    "total_questions": 15,
+    "correct_answers": 5,
+    "ebisu_model": {
+        "alpha": 33.0,
+        "beta": 712.0,
+        "t": 2.74176524782998e-23
+    },
+    "total_questions": 39,
     "vocab_list": [
         {
             "dialogue": "1-2",
@@ -10,6 +15,7 @@
             ],
             "hiragana": "ともだち",
             "kanji": "友達",
+            "last_question_time": 15235356043971,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "tomodachi"
@@ -22,6 +28,7 @@
             ],
             "hiragana": "りょうり",
             "kanji": "料理",
+            "last_question_time": 15235356050421,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "ryouri"
@@ -34,6 +41,7 @@
             ],
             "hiragana": "ゲーム",
             "kanji": "ゲーム",
+            "last_question_time": 15235356054201,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "geemu"
@@ -46,6 +54,7 @@
             ],
             "hiragana": "れきし",
             "kanji": "歴史",
+            "last_question_time": 15235356057571,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "rekishi"
@@ -58,6 +67,7 @@
             ],
             "hiragana": "だいがくいんせい",
             "kanji": "大学院生",
+            "last_question_time": 15235356060581,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "daigakuinsei"
@@ -70,6 +80,7 @@
             ],
             "hiragana": "いちねんせい",
             "kanji": "一年生",
+            "last_question_time": 15235356064511,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "ichinensei"
@@ -82,6 +93,7 @@
             ],
             "hiragana": "だいがくせい",
             "kanji": "大学生",
+            "last_question_time": 15235356067431,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "daigakusei"
@@ -94,6 +106,7 @@
             ],
             "hiragana": "にねんせい",
             "kanji": "二年生",
+            "last_question_time": 15235356070251,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "ninensei"
@@ -106,6 +119,7 @@
             ],
             "hiragana": "よねんせい",
             "kanji": "四年生",
+            "last_question_time": 15235356073221,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "yonensei"
@@ -118,6 +132,7 @@
             ],
             "hiragana": "なまえ",
             "kanji": "名前",
+            "last_question_time": 15235356078341,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "namae"
@@ -131,6 +146,7 @@
             ],
             "hiragana": "わたし",
             "kanji": "私",
+            "last_question_time": 15235356081371,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "watashi"
@@ -143,6 +159,7 @@
             ],
             "hiragana": "にほんじん",
             "kanji": "日本人",
+            "last_question_time": 15235356084251,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "nihonjin"
@@ -155,6 +172,7 @@
             ],
             "hiragana": "インターネット／ネット",
             "kanji": "インターネット／ネット",
+            "last_question_time": 15235356087441,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "intaanetto/netto"
@@ -167,6 +185,7 @@
             ],
             "hiragana": "えいご",
             "kanji": "英語",
+            "last_question_time": 15235356090351,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "eigo"
@@ -179,6 +198,7 @@
             ],
             "hiragana": "アニメ",
             "kanji": "アニメ",
+            "last_question_time": 15235356093141,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "anime"
@@ -191,6 +211,7 @@
             ],
             "hiragana": "えいが",
             "kanji": "映画",
+            "last_question_time": 15235356095991,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "eiga"
@@ -203,6 +224,7 @@
             ],
             "hiragana": "せんせい",
             "kanji": "先生",
+            "last_question_time": 15235356098671,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "sensei"
@@ -215,6 +237,7 @@
             ],
             "hiragana": "せんこう",
             "kanji": "専攻",
+            "last_question_time": 15235356105521,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "senkou"
@@ -227,6 +250,7 @@
             ],
             "hiragana": "にほん",
             "kanji": "日本",
+            "last_question_time": 15235356108381,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "nihon"
@@ -239,6 +263,7 @@
             ],
             "hiragana": "けいえいがく",
             "kanji": "経営学",
+            "last_question_time": 15235356111211,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "keieigaku"
@@ -251,6 +276,7 @@
             ],
             "hiragana": "げんごがく",
             "kanji": "言語学",
+            "last_question_time": 15235356114061,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "gengogaku"
@@ -263,6 +289,7 @@
             ],
             "hiragana": "ハワイだいがく",
             "kanji": "ハワイ大学",
+            "last_question_time": 15235356116981,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "Hawai Daigaku"
@@ -275,6 +302,7 @@
             ],
             "hiragana": "サーフィン",
             "kanji": "サーフィン",
+            "last_question_time": 15235356119801,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "saafin"
@@ -287,6 +315,7 @@
             ],
             "hiragana": "コンピューター",
             "kanji": "コンピューター",
+            "last_question_time": 15235356122591,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "konpyuutaa"
@@ -299,6 +328,7 @@
             ],
             "hiragana": "にほんご",
             "kanji": "日本語",
+            "last_question_time": 15235356125421,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "nihongo"
@@ -311,6 +341,7 @@
             ],
             "hiragana": "かんこうがく",
             "kanji": "観光学",
+            "last_question_time": 15235356128181,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "kankougaku"
@@ -323,6 +354,7 @@
             ],
             "hiragana": "いぬ",
             "kanji": "犬",
+            "last_question_time": 15235356130971,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "inu"
@@ -335,6 +367,7 @@
             ],
             "hiragana": "ところ",
             "kanji": "所",
+            "last_question_time": 15235356133751,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "tokoro"
@@ -347,6 +380,7 @@
             ],
             "hiragana": "りょこう",
             "kanji": "旅行",
+            "last_question_time": 15235356136581,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "ryokou"
@@ -359,6 +393,7 @@
             ],
             "hiragana": "スポーツ",
             "kanji": "スポーツ",
+            "last_question_time": 15235356139301,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "supootsu"
@@ -371,6 +406,7 @@
             ],
             "hiragana": "だいがく",
             "kanji": "大学",
+            "last_question_time": 15235356142041,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "daigaku"
@@ -383,6 +419,7 @@
             ],
             "hiragana": "おんがく",
             "kanji": "音楽",
+            "last_question_time": 15235356144771,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "ongaku"
@@ -395,6 +432,7 @@
             ],
             "hiragana": "こちら",
             "kanji": "こちら",
+            "last_question_time": 15235356147521,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "kochira"
@@ -407,6 +445,7 @@
             ],
             "hiragana": "くに",
             "kanji": "国",
+            "last_question_time": 15235356156221,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "kuni"
@@ -419,6 +458,7 @@
             ],
             "hiragana": "がくせい",
             "kanji": "学生",
+            "last_question_time": 15235356158931,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "gakusei"
@@ -431,6 +471,7 @@
             ],
             "hiragana": "おなじ",
             "kanji": "同じ",
+            "last_question_time": 15235356161701,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "onaji"
@@ -443,6 +484,7 @@
             ],
             "hiragana": "どくしょ",
             "kanji": "読書",
+            "last_question_time": 15235356164441,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "dokusho"
@@ -455,6 +497,7 @@
             ],
             "hiragana": "さんねんせい",
             "kanji": "三年生",
+            "last_question_time": 15235356167311,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "sannensei"
@@ -467,6 +510,7 @@
             ],
             "hiragana": "うみ",
             "kanji": "海",
+            "last_question_time": 15235356170301,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "umi"
@@ -479,6 +523,7 @@
             ],
             "hiragana": "スミス",
             "kanji": "スミス",
+            "last_question_time": 15235356173051,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "sumisu"
@@ -491,6 +536,7 @@
             ],
             "hiragana": "しゅみ",
             "kanji": "趣味",
+            "last_question_time": 15235356175791,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "shumi"
@@ -503,6 +549,7 @@
             ],
             "hiragana": "テニス",
             "kanji": "テニス",
+            "last_question_time": 15235356179131,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "tenisu"
@@ -515,6 +562,7 @@
             ],
             "hiragana": "ちかく",
             "kanji": "近く",
+            "last_question_time": 15235356181861,
             "lesson": "1",
             "part_of_speech": "noun",
             "romaji": "chikaku"

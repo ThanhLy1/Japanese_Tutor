@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <boost/math/special_functions/beta.hpp>
+#include <nlohmann/json.hpp>
 
 class Ebisu {
 public:
@@ -19,6 +20,9 @@ public:
     void setAlpha(double newAlpha);
     void setBeta(double newBeta);
     void setT(double newT);
+
+    nlohmann::json toJson() const;
+    void fromJson(const nlohmann::json& jsonModel);
 
 private:
     double alpha_;
@@ -89,5 +93,23 @@ void Ebisu::setAlpha(double newAlpha) { alpha_ = newAlpha; }
 void Ebisu::setBeta(double newBeta) { beta_ = newBeta; }
 
 void Ebisu::setT(double newT) { t_ = newT; }
+
+nlohmann::json Ebisu::toJson() const {
+    nlohmann::json jsonModel;
+    jsonModel["alpha"] = alpha_;
+    jsonModel["beta"] = beta_;
+    jsonModel["t"] = t_;
+    return jsonModel;
+}
+
+void Ebisu::fromJson(const nlohmann::json& jsonModel) {
+    if (jsonModel.contains("alpha") && jsonModel.contains("beta") && jsonModel.contains("t")) {
+        alpha_ = jsonModel["alpha"];
+        beta_ = jsonModel["beta"];
+        t_ = jsonModel["t"];
+    } else {
+        throw std::invalid_argument("Invalid JSON format for Ebisu model.");
+    }
+}
 
 #endif  // EBISU_H_

@@ -9,7 +9,7 @@
 #include <nlohmann/json.hpp>
 
 class Vocab {
-    private:
+private:
     std::string kanji_;
     std::string hiragana_;
     std::string romaji_;
@@ -18,10 +18,32 @@ class Vocab {
     std::string dialogue_;
     std::string lesson_;
     double difficulty_ = 0.0; // default initializer
+    std::chrono::steady_clock::time_point lastQuestionTime_;
 
 public:
-    Vocab() = default;
-    explicit Vocab(const nlohmann::json& jsonData);
+    Vocab()
+        : kanji_(""),
+          hiragana_(""),
+          romaji_(""),
+          english_(),
+          partOfSpeech_(""),
+          dialogue_(""),
+          lesson_(""),
+          difficulty_(0.0),
+          lastQuestionTime_(std::chrono::steady_clock::now())  // Initialized with the current time
+    {}
+
+    explicit Vocab(const nlohmann::json& jsonData)
+        : kanji_(jsonData["kanji"].get<std::string>()),
+          hiragana_(jsonData["hiragana"].get<std::string>()),
+          romaji_(jsonData["romaji"].get<std::string>()),
+          english_(jsonData["english"].get<std::vector<std::string>>()),
+          partOfSpeech_(jsonData["part_of_speech"].get<std::string>()),
+          dialogue_(jsonData["dialogue"].get<std::string>()),
+          lesson_(jsonData["lesson"].get<std::string>()),
+          difficulty_(jsonData["difficulty"].get<double>()),
+          lastQuestionTime_(std::chrono::steady_clock::now())  // Initialized with the current time
+    {}
 
     void loadFromJsonFile(const std::string& filename);
     void saveToPersistenceFile(const std::string& filename) const;
@@ -47,19 +69,24 @@ public:
 
     void printDetails() const;
     std::string correctAnswer() const;
+
+    std::chrono::steady_clock::time_point getLastQuestionTime() const;
+    void setLastQuestionTime(const std::chrono::steady_clock::time_point& time);
 };
 
-//Vocab::Vocab() = default;
-
-Vocab::Vocab(const nlohmann::json& jsonData)
-    : kanji_(jsonData["kanji"]),
-      hiragana_(jsonData["hiragana"]),
-      romaji_(jsonData["romaji"]),
-      english_(jsonData["english"].get<std::vector<std::string>>()),
-      partOfSpeech_(jsonData["part_of_speech"]),
-      dialogue_(jsonData["dialogue"]),
-      lesson_(jsonData["lesson"]),
-      difficulty_(jsonData["difficulty"]) {}
+nlohmann::json Vocab::toJson() const {
+    nlohmann::json vocabJson;
+    vocabJson["kanji"] = kanji_;
+    vocabJson["hiragana"] = hiragana_;
+    vocabJson["romaji"] = romaji_;
+    vocabJson["english"] = english_;
+    vocabJson["part_of_speech"] = partOfSpeech_;
+    vocabJson["dialogue"] = dialogue_;
+    vocabJson["lesson"] = lesson_;
+    vocabJson["difficulty"] = difficulty_;
+    vocabJson["last_question_time"] = lastQuestionTime_.time_since_epoch().count();
+    return vocabJson;
+}
 
 void Vocab::loadFromJsonFile(const std::string& filename) {
     std::ifstream file(filename);
@@ -78,6 +105,10 @@ void Vocab::loadFromJsonFile(const std::string& filename) {
 
     if (jsonData.is_array() && !jsonData.empty()) {
         *this = Vocab(jsonData[0]);
+        if (jsonData[0].contains("last_question_time")) {
+            auto time = jsonData[0]["last_question_time"].get<long long>();
+            lastQuestionTime_ = std::chrono::steady_clock::time_point(std::chrono::nanoseconds(time));
+        }
     } else {
         std::cout << "Invalid JSON data." << std::endl;
     }
@@ -86,8 +117,7 @@ void Vocab::loadFromJsonFile(const std::string& filename) {
 void Vocab::saveToPersistenceFile(const std::string& filename) const {
     std::ofstream file(filename);
     if (!file.is_open()) {
-        std::cout << "Failed to open persistence file for writing."
-                  << std::endl;
+        std::cout << "Failed to open persistence file for writing." << std::endl;
         return;
     }
 
@@ -99,7 +129,9 @@ void Vocab::saveToPersistenceFile(const std::string& filename) const {
         {"part_of_speech", partOfSpeech_},
         {"dialogue", dialogue_},
         {"lesson", lesson_},
-        {"difficulty", difficulty_}};
+        {"difficulty", difficulty_},
+        {"last_question_time", std::chrono::time_point_cast<std::chrono::nanoseconds>(lastQuestionTime_).time_since_epoch().count()}
+    };
 
     nlohmann::json arrayData = nlohmann::json::array();
     arrayData.push_back(jsonData);
@@ -108,22 +140,8 @@ void Vocab::saveToPersistenceFile(const std::string& filename) const {
         file << std::setw(4) << arrayData << std::endl;
         std::cout << "Data saved to persistence file." << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Failed to write to persistence file: " << e.what()
-                  << std::endl;
+        std::cout << "Failed to write to persistence file: " << e.what() << std::endl;
     }
-}
-
-nlohmann::json Vocab::toJson() const {
-    nlohmann::json vocabJson;
-    vocabJson["kanji"] = kanji_;
-    vocabJson["hiragana"] = hiragana_;
-    vocabJson["romaji"] = romaji_;
-    vocabJson["english"] = english_;
-    vocabJson["part_of_speech"] = partOfSpeech_;
-    vocabJson["dialogue"] = dialogue_;
-    vocabJson["lesson"] = lesson_;
-    vocabJson["difficulty"] = difficulty_;
-    return vocabJson;
 }
 
 std::string Vocab::getKanji() const { return kanji_; }
@@ -191,5 +209,14 @@ std::string Vocab::correctAnswer() const {
     }
     return ss.str();
 }
+
+std::chrono::steady_clock::time_point Vocab::getLastQuestionTime() const {
+    return lastQuestionTime_;
+}
+
+void Vocab::setLastQuestionTime(const std::chrono::steady_clock::time_point& time) {
+    lastQuestionTime_ = time;
+}
+
 
 #endif  // VOCAB_H_
