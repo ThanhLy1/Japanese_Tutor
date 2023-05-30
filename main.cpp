@@ -27,8 +27,7 @@ int main() {
     // Print the JSON file contents
     printJsonFile("quiz_data.json");
     */
-
-    Quiz myQuiz;
+ Quiz myQuiz;
     myQuiz.loadQuiz("quiz_data.json");
     myQuiz.loadQuizState();  // Load the quiz state before starting the quiz
     myQuiz.startQuiz();

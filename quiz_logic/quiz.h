@@ -16,6 +16,7 @@
 #include "ebisu.h"
 #include "vocab.h"
 #include "utf8/utf8.h"
+#include "quizfilehandler.h"
 
 class Quiz {
 private:
@@ -24,7 +25,7 @@ private:
     std::mt19937 generator_;
     std::uniform_int_distribution<int> distribution_;
     Ebisu ebisuModel_;
-    std::string quizType_;
+    std::string testType_;
     size_t totalQuestions_ = 0;
     int correctAnswers_ = 0;
     const int NUM_QUESTIONS = 10;
@@ -38,7 +39,7 @@ public:
           generator_(rd_()),
           distribution_(),
           ebisuModel_(),
-          quizType_(),
+          testType_(),
           totalQuestions_(0),
           correctAnswers_(0),
           NUM_QUESTIONS(10)
@@ -65,12 +66,12 @@ public:
     void saveQuizState();
     void loadQuizState();
 
-    // Needed for unit quiz otherwise it's protected class
-    //std::string quizType_;
+    // Needed for unit test otherwise it's protected class
+    //std::string testType_;
     bool checkAnswer(const std::string& userAnswer, const std::string& correctAnswer);
     std::string trim(const std::string& str, const char& trimChar = ' ');
     std::string toLowercaseAndTrim(const std::string& str);
-    void selectQuizType();
+    void selectTestType();
     std::string getCorrectAnswer(const Vocab& vocab);
     std::string getUserAnswer();
     bool containsInvalidCharacters(const std::string& str);
@@ -118,176 +119,6 @@ bool Quiz::loadQuiz(const std::string& filename) {
 
     distribution_ = std::uniform_int_distribution<int>(0, static_cast<int>(vocabList_.size()) - 1);
     return true;
-}
-
-void Quiz::startQuiz() {
-    selectQuizType();
-    if (quizType_.empty()) {
-        std::cout << "Invalid quiz type. Quiz aborted." << std::endl;
-        return;
-    }
-
-    for (int i = 0; i < NUM_QUESTIONS; ++i) {
-        Vocab vocab = getRandomVocab();
-        askQuestion(vocab);
-    }
-}
-
-void Quiz::selectQuizType() {
-    std::map<int, std::string> quizTypeMap = {
-        {1, "Kanji to Hiragana"},
-        {2, "Hiragana to English"},
-        {3, "Hiragana to Romaji"},
-        {4, "English to Hiragana"}
-    };
-
-    std::cout << "Select the quiz type:" << std::endl;
-    for (const auto& quizType : quizTypeMap) {
-        std::cout << quizType.first << ". " << quizType.second << std::endl;
-    }
-
-    int choice;
-    std::cin >> choice;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
-
-    auto it = quizTypeMap.find(choice);
-    if (it == quizTypeMap.end()) {
-        std::cout << "Invalid quiz type. Quiz aborted." << std::endl;
-        return;
-    }
-
-    quizType_ = it->second;
-}
-
-std::string Quiz::getUserAnswer() {
-    std::string userAnswer;
-
-    while (true) {
-        std::getline(std::cin, userAnswer);
-
-        if (userAnswer.empty()) {
-            std::cout << "Invalid answer. Please try again: ";
-            continue;
-        }
-
-        std::string answerLower = toLowercaseAndTrim(userAnswer);
-        if (answerLower == "q" || answerLower == "quit") {
-            std::cout << "Quiz terminated by the user." << std::endl;
-            saveQuizState();
-            // You may choose not to exit here, but handle the termination appropriately
-            exit(0);
-        }
-
-        if (validateAnswer(userAnswer)) {
-            break;
-        }
-
-        std::cout << "Invalid answer. Please try again: ";
-    }
-    return userAnswer;
-}
-
-void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
-    std::string lowerAndTrimmedAnswer = toLowercaseAndTrim(userAnswer);
-
-    if (lowerAndTrimmedAnswer == "") {
-        std::cout << "Invalid answer. Please try again." << std::endl;
-        askQuestion(vocab);  // Ask the question again
-        return;
-    }
-
-    bool isCorrect = false;
-
-    if (quizType_ == "Kanji to Hiragana") {
-        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
-    }
-    else if (quizType_ == "Hiragana to English") {
-        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
-    }
-    else if (quizType_ == "Hiragana to Romaji") {
-        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getRomaji());
-    }
-    else if (quizType_ == "English to Hiragana") {
-        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
-    }
-    else {
-        std::cout << "Invalid quiz type." << std::endl;
-        return;
-    }
-
-    if (isCorrect) {
-        std::cout << "Correct!" << std::endl;
-        correctAnswers_++;
-    }
-    else {
-        std::cout << "Incorrect. The correct answer is: " << getCorrectAnswer(vocab) << std::endl;
-    }
-    totalQuestions_++;
-    double success = isCorrect ? 1.0 : 0.0;
-    ebisuModel_.updateRecall(success, 1.0, vocab.getDifficulty());
-}
-
-void Quiz::askQuestion(const Vocab& vocab) {
-    std::string question;
-    std::string correctAnswer;
-
-    if (quizType_ == "Kanji to Hiragana") {
-        question = "Translate the following kanji to hiragana: ";
-        correctAnswer = vocab.getHiragana();
-        std::cout << question << vocab.getKanji() << std::endl;
-    }
-    else if (quizType_ == "Hiragana to English") {
-        question = "Translate the following hiragana to English: ";
-        correctAnswer = vocab.getEnglish()[0];
-        std::cout << question << vocab.getHiragana() << std::endl;
-    }
-    else if (quizType_ == "Hiragana to Romaji") {
-        question = "Translate the following hiragana to romaji: ";
-        correctAnswer = vocab.getRomaji()[0];
-        std::cout << question << vocab.getHiragana() << std::endl;
-    }
-    else if (quizType_ == "English to Hiragana") {
-        question = "Translate the following English word to hiragana: ";
-        correctAnswer = vocab.getHiragana();
-        std::cout << question << vocab.getEnglish()[0] << std::endl;
-    }
-    else {
-        std::cout << "Invalid quiz type." << std::endl;
-        return;
-    }
-
-    while (true) {
-        std::string userAnswer = getUserAnswer();
-        if (userAnswer.empty()) {
-            continue;  // Ask the question again if the user input is empty
-        }
-        if (userAnswer == "q" || userAnswer == "quit") {
-            std::cout << "Quiz terminated by the user." << std::endl;
-            return;  // Terminate the quiz if the user enters "q" or "quit"
-        }
-        processAnswer(vocab, userAnswer);
-        break;
-    }
-}
-
-Vocab Quiz::getRandomVocab() {
-    if (vocabList_.empty()) {
-        std::cerr << "vocabList is empty!" << std::endl;
-        // Return an empty Vocab object as a fallback
-        return Vocab();
-    }
-    int index = distribution_(generator_);
-    return vocabList_[index];
-}
-
-void Quiz::printStatistics() const {
-    std::cout << "Total questions: " << totalQuestions_ << std::endl;
-    std::cout << "Correct answers: " << correctAnswers_ << std::endl;
-    if (totalQuestions_ > 0) {
-        double percentage = 100.0 * correctAnswers_ / totalQuestions_;
-        std::cout << "Accuracy: " << std::fixed << std::setprecision(2)
-            << percentage << "%" << std::endl;
-    }
 }
 
 void Quiz::saveQuizState() {
@@ -339,6 +170,197 @@ void Quiz::loadQuizState() {
     }
 }
 
+void Quiz::startQuiz() {
+    selectTestType();
+    if (testType_.empty()) {
+        std::cout << "Invalid test type. Quiz aborted." << std::endl;
+        return;
+    }
+
+    for (int i = 0; i < NUM_QUESTIONS; ++i) {
+        Vocab vocab = getRandomVocab();
+        askQuestion(vocab);
+    }
+}
+
+void Quiz::selectTestType() {
+    std::map<int, std::string> quizTypeMap = {
+        {1, "Kanji to Hiragana"},
+        {2, "Hiragana to English"},
+        {3, "Hiragana to Romaji"},
+        {4, "English to Hiragana"}
+    };
+
+    std::cout << "Select the quiz type (Enter 'q' or 'quit' to exit):" << std::endl;
+    for (const auto& quizType : quizTypeMap) {
+        std::cout << quizType.first << ". " << quizType.second << std::endl;
+    }
+
+    const int maxAttempts = 3;
+    int attempts = 0;
+    std::string choice;
+
+    while (attempts < maxAttempts) {
+        std::cout << "Enter your choice: ";
+        std::getline(std::cin, choice);
+
+        if (choice == "q" || choice == "quit") {
+            std::cout << "Quiz terminated by the user." << std::endl;
+            saveQuizState();
+            exit(0);
+        }
+
+        try {
+            int quizChoice = std::stoi(choice);
+            auto it = quizTypeMap.find(quizChoice);
+            if (it != quizTypeMap.end()) {
+                testType_ = it->second;
+                return;
+            }
+        } catch (const std::exception& e) {
+            // Invalid integer input
+        }
+
+        std::cout << "Invalid input. Please try again." << std::endl;
+        attempts++;
+    }
+
+    std::cout << "Maximum attempts reached. Exiting the program." << std::endl;
+    saveQuizState();
+    exit(0);
+}
+
+std::string Quiz::getUserAnswer() {
+    std::string userAnswer;
+
+    while (true) {
+        std::getline(std::cin, userAnswer);
+
+        if (userAnswer.empty()) {
+            std::cout << "Invalid answer. Please try again: ";
+            continue;
+        }
+
+        std::string answerLower = toLowercaseAndTrim(userAnswer);
+        if (answerLower == "q" || answerLower == "quit") {
+            std::cout << "Quiz terminated by the user." << std::endl;
+            saveQuizState();
+            // You may choose not to exit here, but handle the termination appropriately
+            exit(0);
+        }
+
+        if (validateAnswer(userAnswer)) {
+            break;
+        }
+
+        std::cout << "Invalid answer. Please try again: ";
+    }
+    return userAnswer;
+}
+
+void Quiz::processAnswer(const Vocab& vocab, const std::string& userAnswer) {
+    std::string lowerAndTrimmedAnswer = toLowercaseAndTrim(userAnswer);
+
+    if (lowerAndTrimmedAnswer == "") {
+        std::cout << "Invalid answer. Please try again." << std::endl;
+        askQuestion(vocab);  // Ask the question again
+        return;
+    }
+
+    bool isCorrect = false;
+
+    if (testType_ == "Kanji to Hiragana") {
+        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
+    }
+    else if (testType_ == "Hiragana to English") {
+        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getEnglish()[0]);
+    }
+    else if (testType_ == "Hiragana to Romaji") {
+        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getRomaji());
+    }
+    else if (testType_ == "English to Hiragana") {
+        isCorrect = checkAnswer(lowerAndTrimmedAnswer, vocab.getHiragana());
+    }
+    else {
+        std::cout << "Invalid test type." << std::endl;
+        return;
+    }
+
+    if (isCorrect) {
+        std::cout << "Correct!" << std::endl;
+        correctAnswers_++;
+    }
+    else {
+        std::cout << "Incorrect. The correct answer is: " << getCorrectAnswer(vocab) << std::endl;
+    }
+    totalQuestions_++;
+    double success = isCorrect ? 1.0 : 0.0;
+    ebisuModel_.updateRecall(success, 1.0, vocab.getDifficulty());
+}
+
+void Quiz::askQuestion(const Vocab& vocab) {
+    std::string question;
+    std::string correctAnswer;
+
+    if (testType_ == "Kanji to Hiragana") {
+        question = "Translate the following kanji to hiragana: ";
+        correctAnswer = vocab.getHiragana();
+        std::cout << question << vocab.getKanji() << std::endl;
+    }
+    else if (testType_ == "Hiragana to English") {
+        question = "Translate the following hiragana to English: ";
+        correctAnswer = vocab.getEnglish()[0];
+        std::cout << question << vocab.getHiragana() << std::endl;
+    }
+    else if (testType_ == "Hiragana to Romaji") {
+        question = "Translate the following hiragana to romaji: ";
+        correctAnswer = vocab.getRomaji()[0];
+        std::cout << question << vocab.getHiragana() << std::endl;
+    }
+    else if (testType_ == "English to Hiragana") {
+        question = "Translate the following English word to hiragana: ";
+        correctAnswer = vocab.getHiragana();
+        std::cout << question << vocab.getEnglish()[0] << std::endl;
+    }
+    else {
+        std::cout << "Invalid test type." << std::endl;
+        return;
+    }
+
+    while (true) {
+        std::string userAnswer = getUserAnswer();
+        if (userAnswer.empty()) {
+            continue;  // Ask the question again if the user input is empty
+        }
+        if (userAnswer == "q" || userAnswer == "quit") {
+            std::cout << "Quiz terminated by the user." << std::endl;
+            return;  // Terminate the quiz if the user enters "q" or "quit"
+        }
+        processAnswer(vocab, userAnswer);
+        break;
+    }
+}
+
+Vocab Quiz::getRandomVocab() {
+    if (vocabList_.empty()) {
+        std::cerr << "vocabList is empty!" << std::endl;
+        // Return an empty Vocab object as a fallback
+        return Vocab();
+    }
+    int index = distribution_(generator_);
+    return vocabList_[index];
+}
+
+void Quiz::printStatistics() const {
+    std::cout << "Total questions: " << totalQuestions_ << std::endl;
+    std::cout << "Correct answers: " << correctAnswers_ << std::endl;
+    if (totalQuestions_ > 0) {
+        double percentage = 100.0 * correctAnswers_ / totalQuestions_;
+        std::cout << "Accuracy: " << std::fixed << std::setprecision(2)
+            << percentage << "%" << std::endl;
+    }
+}
+
 bool Quiz::checkAnswer(const std::string& userAnswer, const std::string& correctAnswer) {
     // Convert both answers to lowercase and remove dashes
     std::string lowerUserAnswer = userAnswer;
@@ -352,20 +374,20 @@ bool Quiz::checkAnswer(const std::string& userAnswer, const std::string& correct
 }
 
 std::string Quiz::getCorrectAnswer(const Vocab& vocab) {
-    if (quizType_ == "Kanji to Hiragana") {
+    if (testType_ == "Kanji to Hiragana") {
         return vocab.getHiragana();
     }
-    else if (quizType_ == "Hiragana to English") {
+    else if (testType_ == "Hiragana to English") {
         return vocab.getEnglish()[0];
     }
-    else if (quizType_ == "Hiragana to Romaji") {
+    else if (testType_ == "Hiragana to Romaji") {
         return vocab.getRomaji();
     }
-    else if (quizType_ == "English to Hiragana") {
+    else if (testType_ == "English to Hiragana") {
         return vocab.getHiragana();
     }
     else {
-        return "Invalid quiz type.";
+        return "Invalid test type.";
     }
 }
 

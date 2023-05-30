@@ -12,6 +12,7 @@ public:
     bool loadQuiz(const std::string& filename, std::vector<Vocab>& vocabList);
     bool saveQuizState(const std::string& filename, int totalQuestions, int correctAnswers, const std::vector<Vocab>& vocabList);
     bool loadQuizState(const std::string& filename, int& totalQuestions, int& correctAnswers, std::vector<Vocab>& vocabList);
+    bool resetQuizStateFile(const std::string& filename);
 
 private:
     json convertVocabListToJson(const std::vector<Vocab>& vocabList);
@@ -102,4 +103,14 @@ std::vector<Vocab> QuizFileHandler::convertJsonToVocabList(const json& jsonData)
         vocabList.push_back(vocab);
     }
     return vocabList;
+}
+
+bool QuizFileHandler::resetQuizStateFile(const std::string& filename) {
+    if (std::remove(filename.c_str()) == 0) {
+        std::cout << "Quiz state file reset." << std::endl;
+        return true;
+    } else {
+        std::cerr << "Failed to reset quiz state file." << std::endl;
+        return false;
+    }
 }
